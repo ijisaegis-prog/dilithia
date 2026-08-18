@@ -1,14 +1,9 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+//! Dilithia Canonical Serialization.
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+#![forbid(unsafe_code)]
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub mod error;
+pub mod uleb128;
+
+pub use error::SerializationError;
+pub use uleb128::{decode_uleb128_u64, encode_uleb128_u64};
