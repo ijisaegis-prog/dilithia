@@ -14,12 +14,14 @@
 - Current stable milestone: DCS-1 completed
 - Next planned milestone: DCS-2
 
-## Current Stable Main
+## DCS-1 Stable Baseline
 
-- `main` merge commit: `d7c1d3d`
+- DCS-1 merge commit: `d7c1d3d`
 - DCS-1 implementation commit: `e604a78`
 - PR #1 merged
 - Post-merge CI green
+
+This section records the immutable DCS-1 milestone baseline, not the latest `main` branch HEAD.
 
 ## Completed
 
