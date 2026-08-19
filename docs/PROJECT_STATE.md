@@ -11,8 +11,8 @@
 
 - Pre-Genesis
 - Design & Early Implementation Phase
-- Current stable milestone: DCS-1 completed
-- Next planned milestone: DCS-2
+- Current stable milestone: DCS-2 completed
+- Next planned milestone: not yet designated
 
 ## DCS-1 Stable Baseline
 
@@ -22,6 +22,22 @@
 - Post-merge CI green
 
 This section records the immutable DCS-1 milestone baseline, not the latest `main` branch HEAD.
+
+## DCS-2 Stable Baseline
+
+### DCS-2A
+
+- DCS-2A implementation commit: `0f36be7`
+- DCS-2A merge commit: `63f7468`
+- PR #4 merged
+
+### DCS-2B
+
+- DCS-2B implementation commit: `996f11e`
+- DCS-2B merge commit: `2164b53`
+- PR #5 merged
+
+This section records the immutable DCS-2 milestone baseline, not the latest `main` branch HEAD.
 
 ## Completed
 
@@ -45,19 +61,44 @@ This section records the immutable DCS-1 milestone baseline, not the latest `mai
 - Rejection of ULEB128 values that overflow `u64`
 - Decoder input cursor changes only after successful decoding and remains
   unchanged on decoding errors
+- DCS-2A canonical fixed-width little-endian serialization for `u8`, `u16`,
+  `u32`, `u64`, and `u128`
+- Exact-width encoding of 1, 2, 4, 8, and 16 bytes for the DCS-2A unsigned
+  integer primitives
+- Strict rejection of truncated DCS-2A integer input with `UnexpectedEof`
+- DCS-2A decoder cursors advance only after successful decoding and remain
+  unchanged on decoding failure
+- DCS-2B project-owned `U256` type with private canonical little-endian
+  `[u8; 32]` storage
+- `U256::from_le_bytes`, `U256::to_le_bytes`, `encode_u256`, and `decode_u256`
+- Exact canonical 32-byte `U256` encoding, with every 32-byte bit pattern valid
+- Truncated `U256` input rejected with `UnexpectedEof`, with the decoder cursor
+  preserved on failure
+- No `U256` arithmetic or external integer dependency added
 - Unsafe Rust forbidden at the `dilithia-serialization` crate root
 
-## Current DCS-1 API
+## Current Serialization API
 
-The public API currently exported by `dilithia-serialization` is:
+The public API below is derived from the current `dilithia-serialization`
+source. `error` and `uleb128` are public modules; the fixed-width and `U256`
+items are re-exported at the crate root from private modules.
+
+### Shared error API
 
 ```rust
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SerializationError {
     UnexpectedEof,
     NonCanonicalUleb128,
     Uleb128Overflow,
 }
+```
 
+`SerializationError` implements `core::fmt::Display` and `std::error::Error`.
+
+### DCS-1 API
+
+```rust
 pub fn encode_uleb128_u64(value: u64) -> Vec<u8>;
 
 pub fn decode_uleb128_u64(
@@ -69,10 +110,44 @@ pub fn decode_uleb128_u64(
 `u64`. `decode_uleb128_u64` accepts one canonical ULEB128-encoded `u64` and
 advances the supplied slice only on success.
 
+### DCS-2A API
+
+```rust
+pub fn encode_u8(value: u8) -> [u8; 1];
+pub fn encode_u16(value: u16) -> [u8; 2];
+pub fn encode_u32(value: u32) -> [u8; 4];
+pub fn encode_u64(value: u64) -> [u8; 8];
+pub fn encode_u128(value: u128) -> [u8; 16];
+
+pub fn decode_u8(input: &mut &[u8]) -> Result<u8, SerializationError>;
+pub fn decode_u16(input: &mut &[u8]) -> Result<u16, SerializationError>;
+pub fn decode_u32(input: &mut &[u8]) -> Result<u32, SerializationError>;
+pub fn decode_u64(input: &mut &[u8]) -> Result<u64, SerializationError>;
+pub fn decode_u128(input: &mut &[u8]) -> Result<u128, SerializationError>;
+```
+
+### DCS-2B API
+
+```rust
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct U256 {
+    bytes_le: [u8; 32], // private
+}
+
+impl U256 {
+    pub const fn from_le_bytes(bytes: [u8; 32]) -> Self;
+    pub const fn to_le_bytes(&self) -> [u8; 32];
+}
+
+pub fn encode_u256(value: &U256) -> [u8; 32];
+
+pub fn decode_u256(
+    input: &mut &[u8],
+) -> Result<U256, SerializationError>;
+```
+
 ## Explicitly Not Implemented Yet
 
-- Fixed-width DCS unsigned primitives (`u8`, `u16`, `u32`, `u64`, `u128`, and
-  `u256`), which the Formal Specification defines as little-endian
 - `Bool`
 - `Bytes<N>`
 - `String`, including its resource limit; the exact maximum byte length is
@@ -96,16 +171,9 @@ HIP / Super HIP Process, Crypto Agility, Transactions, State, and Consensus.
 
 ## Next Milestone
 
-DCS-2 is the next planned milestone. The current Formal Specification §3.2
-defines the unsigned integer primitives `u8`, `u16`, `u32`, `u64`, `u128`, and
-`u256` as fixed-width, little-endian encodings. Any DCS-2 implementation must
-remain deterministic and canonical under §3.1 and must not use the ULEB128
-length-prefix encoding as the normal DCS representation of these integer
-primitives.
-
-The Formal Specification does not define a DCS-2 implementation API, detailed
-milestone boundary, or conformance-vector set. Those details must be established
-without resolving or inventing any specification item currently marked **TBD**.
+The next project milestone has not yet been designated by the authoritative
+repository documents. This document does not assign a name, API, or scope to a
+future milestone.
 
 ## Authority Order
 
