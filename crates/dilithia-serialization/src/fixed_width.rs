@@ -52,7 +52,7 @@ pub fn decode_u128(input: &mut &[u8]) -> Result<u128, SerializationError> {
     Ok(u128::from_le_bytes(take_bytes(input)?))
 }
 
-fn take_bytes<const N: usize>(input: &mut &[u8]) -> Result<[u8; N], SerializationError> {
+pub(crate) fn take_bytes<const N: usize>(input: &mut &[u8]) -> Result<[u8; N], SerializationError> {
     let (bytes, remaining) = input
         .split_first_chunk::<N>()
         .ok_or(SerializationError::UnexpectedEof)?;
