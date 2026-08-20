@@ -12,6 +12,7 @@
 - Pre-Genesis
 - Design & Early Implementation Phase
 - Current stable implementation milestone: DCS-3A completed
+- Latest completed serialization implementation: `UnixTimestamp`
 - Next planned milestone: not yet designated
 
 ## DCS-1 Stable Baseline
@@ -49,6 +50,17 @@ This section records the immutable DCS-2 milestone baseline, not the latest `mai
 Specification section or normative protocol designation. This section records
 the immutable DCS-3A implementation baseline, not the latest `main` branch
 HEAD.
+
+## UnixTimestamp Implementation Baseline
+
+- UnixTimestamp implementation commit: `16549b2`
+- UnixTimestamp merge commit: `ab15064`
+- PR #9 merged: `feat(serialization): implement UnixTimestamp`
+
+The UnixTimestamp work is a completed serialization implementation, not a
+newly designated Formal Specification section or project milestone. This
+section records its immutable implementation baseline, not the latest `main`
+branch HEAD.
 
 ## Completed
 
@@ -99,7 +111,19 @@ HEAD.
   the decoder cursor
 - `Bytes<0>` encoding and decoding supported because the current Formal
   Specification does not prohibit N = 0
-- The `dilithia-serialization` crate currently has 32 passing unit tests; this
+- `UnixTimestamp` implemented as the Formal Specification's unsigned `u64`
+  count of milliseconds since the Unix epoch in UTC
+- Canonical `UnixTimestamp` encoding delegates to `encode_u64` and is exactly
+  eight bytes in little-endian order; decoding delegates directly to
+  `decode_u64`
+- Successful `UnixTimestamp` decoding consumes exactly eight bytes and leaves
+  trailing input untouched; truncated input returns `UnexpectedEof` without
+  changing the decoder input
+- No timestamp newtype, new `SerializationError` variant, timestamp range
+  validation, wall-clock access, calendar or timezone conversion, leap-second
+  policy, or external dependency added
+- No TBD value resolved by the UnixTimestamp implementation
+- The `dilithia-serialization` crate currently has 35 passing unit tests; this
   count records current implementation status and is not a protocol invariant
 - Unsafe Rust forbidden at the `dilithia-serialization` crate root
 
@@ -107,8 +131,8 @@ HEAD.
 
 The public API below is derived from the current `dilithia-serialization`
 source. `error` and `uleb128` are public modules; the fixed-width, `U256`,
-`Bool`, and `Bytes<N>` items are re-exported at the crate root from private
-modules.
+`Bool`, `Bytes<N>`, and `UnixTimestamp` items are re-exported at the crate root
+from private modules.
 
 ### Shared error API
 
@@ -192,12 +216,21 @@ pub fn decode_bytes<const N: usize>(
 ) -> Result<[u8; N], SerializationError>;
 ```
 
+### UnixTimestamp API
+
+```rust
+pub fn encode_unix_timestamp(value: u64) -> [u8; 8];
+
+pub fn decode_unix_timestamp(
+    input: &mut &[u8],
+) -> Result<u64, SerializationError>;
+```
+
 ## Explicitly Not Implemented Yet
 
 - `String`, including its resource limit; the exact maximum byte length is
   **TBD**
 - `Option<T>`
-- `UnixTimestamp`
 - `NetworkId` discriminant values are **TBD**
 - `ChainId` representation is **TBD**
 - Domain-tag registry is **TBD**
