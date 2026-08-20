@@ -8,6 +8,7 @@ pub mod error;
 mod fixed_width;
 mod u256;
 pub mod uleb128;
+mod unix_timestamp;
 
 pub use r#bool::{decode_bool, encode_bool};
 pub use bytes::{decode_bytes, encode_bytes};
@@ -18,3 +19,4 @@ pub use fixed_width::{
 };
 pub use u256::{U256, decode_u256, encode_u256};
 pub use uleb128::{decode_uleb128_u64, encode_uleb128_u64};
+pub use unix_timestamp::{decode_unix_timestamp, encode_unix_timestamp};
