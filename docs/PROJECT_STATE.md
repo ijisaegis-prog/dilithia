@@ -11,7 +11,7 @@
 
 - Pre-Genesis
 - Design & Early Implementation Phase
-- Current stable milestone: DCS-2 completed
+- Current stable implementation milestone: DCS-3A completed
 - Next planned milestone: not yet designated
 
 ## DCS-1 Stable Baseline
@@ -38,6 +38,17 @@ This section records the immutable DCS-1 milestone baseline, not the latest `mai
 - PR #5 merged
 
 This section records the immutable DCS-2 milestone baseline, not the latest `main` branch HEAD.
+
+## DCS-3A Stable Baseline
+
+- DCS-3A implementation commit: `2e03620`
+- DCS-3A merge commit: `bc32660`
+- PR #7 merged: `feat(serialization): implement Bool and Bytes<N> DCS-3A`
+
+`DCS-3A` is an implementation/project-tracking label, not a Formal
+Specification section or normative protocol designation. This section records
+the immutable DCS-3A implementation baseline, not the latest `main` branch
+HEAD.
 
 ## Completed
 
@@ -75,13 +86,29 @@ This section records the immutable DCS-2 milestone baseline, not the latest `mai
 - Truncated `U256` input rejected with `UnexpectedEof`, with the decoder cursor
   preserved on failure
 - No `U256` arithmetic or external integer dependency added
+- DCS-3A canonical `Bool` serialization: `false` encodes as `0x00`, `true`
+  encodes as `0x01`, and bytes `0x02..=0xFF` are rejected
+- Empty `Bool` input returns `UnexpectedEof`, while an invalid `Bool` encoding
+  returns `InvalidBool`
+- Successful `Bool` decoding consumes exactly one byte and leaves trailing
+  input untouched; the decoder input remains unchanged on failure
+- DCS-3A canonical `Bytes<N>` serialization as exactly N raw bytes, without a
+  length prefix, ULEB128 prefix, or padding; every `[u8; N]` value is valid
+- Successful `Bytes<N>` decoding consumes exactly N bytes and leaves trailing
+  input untouched; insufficient input returns `UnexpectedEof` without changing
+  the decoder cursor
+- `Bytes<0>` encoding and decoding supported because the current Formal
+  Specification does not prohibit N = 0
+- The `dilithia-serialization` crate currently has 32 passing unit tests; this
+  count records current implementation status and is not a protocol invariant
 - Unsafe Rust forbidden at the `dilithia-serialization` crate root
 
 ## Current Serialization API
 
 The public API below is derived from the current `dilithia-serialization`
-source. `error` and `uleb128` are public modules; the fixed-width and `U256`
-items are re-exported at the crate root from private modules.
+source. `error` and `uleb128` are public modules; the fixed-width, `U256`,
+`Bool`, and `Bytes<N>` items are re-exported at the crate root from private
+modules.
 
 ### Shared error API
 
@@ -89,6 +116,7 @@ items are re-exported at the crate root from private modules.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SerializationError {
     UnexpectedEof,
+    InvalidBool,
     NonCanonicalUleb128,
     Uleb128Overflow,
 }
@@ -146,10 +174,26 @@ pub fn decode_u256(
 ) -> Result<U256, SerializationError>;
 ```
 
+### DCS-3A API
+
+```rust
+pub fn encode_bool(value: bool) -> [u8; 1];
+
+pub fn decode_bool(
+    input: &mut &[u8],
+) -> Result<bool, SerializationError>;
+
+pub fn encode_bytes<const N: usize>(
+    value: &[u8; N],
+) -> [u8; N];
+
+pub fn decode_bytes<const N: usize>(
+    input: &mut &[u8],
+) -> Result<[u8; N], SerializationError>;
+```
+
 ## Explicitly Not Implemented Yet
 
-- `Bool`
-- `Bytes<N>`
 - `String`, including its resource limit; the exact maximum byte length is
   **TBD**
 - `Option<T>`
