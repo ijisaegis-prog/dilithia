@@ -12,7 +12,7 @@
 - Pre-Genesis
 - Design & Early Implementation Phase
 - Current stable implementation milestone: DCS-3A completed
-- Latest completed serialization implementation: `UnixTimestamp`
+- Latest completed serialization implementation: `Option<T>`
 - Next planned milestone: not yet designated
 
 ## DCS-1 Stable Baseline
@@ -61,6 +61,17 @@ The UnixTimestamp work is a completed serialization implementation, not a
 newly designated Formal Specification section or project milestone. This
 section records its immutable implementation baseline, not the latest `main`
 branch HEAD.
+
+## Option<T> Implementation Baseline
+
+- `Option<T>` implementation commit: `b97422c`
+- `Option<T>` merge commit: `467be51`
+- PR #11 merged: `feat(serialization): implement Option<T>`
+
+The `Option<T>` work is a completed serialization implementation, not a newly
+designated Formal Specification section or project milestone. This section
+records its immutable implementation baseline, not the latest `main` branch
+HEAD.
 
 ## Completed
 
@@ -123,7 +134,26 @@ branch HEAD.
   validation, wall-clock access, calendar or timezone conversion, leap-second
   policy, or external dependency added
 - No TBD value resolved by the UnixTimestamp implementation
-- The `dilithia-serialization` crate currently has 35 passing unit tests; this
+- Canonical `Option<T>` serialization: `None` encodes exactly as `0x00`, while
+  `Some(value)` encodes as `0x01` followed by the supplied canonical encoding
+  of `T`; tags `0x02..=0xFF` are rejected
+- `encode_option` propagates nested encoder errors unchanged through its generic
+  error type `E`, does not invoke the nested encoder for `None`, and invokes it
+  exactly once for `Some`
+- `decode_option` returns `UnexpectedEof` for empty input and
+  `InvalidOptionTag` for invalid tags, while propagating nested decoder errors
+  unchanged
+- `Option<T>` decoding uses a local shadow cursor: caller input remains
+  unchanged on every failure, including rollback of the outer `0x01` tag when
+  nested decoding fails
+- Successful `Option<T>` decoding consumes exactly the tag and nested canonical
+  encoding while leaving trailing input untouched
+- Nested `Option<Option<T>>` values are supported through composition of the
+  same public `Option<T>` API; this does not add a protocol rule beyond the
+  existing canonical `Option<T>` definition
+- No serialization trait, general codec framework, or TBD resolution added by
+  the `Option<T>` implementation
+- The `dilithia-serialization` crate currently has 45 passing unit tests; this
   count records current implementation status and is not a protocol invariant
 - Unsafe Rust forbidden at the `dilithia-serialization` crate root
 
@@ -131,8 +161,8 @@ branch HEAD.
 
 The public API below is derived from the current `dilithia-serialization`
 source. `error` and `uleb128` are public modules; the fixed-width, `U256`,
-`Bool`, `Bytes<N>`, and `UnixTimestamp` items are re-exported at the crate root
-from private modules.
+`Bool`, `Bytes<N>`, `UnixTimestamp`, and `Option<T>` items are re-exported at
+the crate root from private modules.
 
 ### Shared error API
 
@@ -141,6 +171,7 @@ from private modules.
 pub enum SerializationError {
     UnexpectedEof,
     InvalidBool,
+    InvalidOptionTag,
     NonCanonicalUleb128,
     Uleb128Overflow,
 }
@@ -226,11 +257,29 @@ pub fn decode_unix_timestamp(
 ) -> Result<u64, SerializationError>;
 ```
 
+### Option<T> API
+
+```rust
+pub fn encode_option<T, F, B, E>(
+    value: Option<T>,
+    encode_value: F,
+) -> Result<Vec<u8>, E>
+where
+    F: FnOnce(T) -> Result<B, E>,
+    B: AsRef<[u8]>;
+
+pub fn decode_option<T, F>(
+    input: &mut &[u8],
+    decode_value: F,
+) -> Result<Option<T>, SerializationError>
+where
+    F: FnOnce(&mut &[u8]) -> Result<T, SerializationError>;
+```
+
 ## Explicitly Not Implemented Yet
 
 - `String`, including its resource limit; the exact maximum byte length is
   **TBD**
-- `Option<T>`
 - `NetworkId` discriminant values are **TBD**
 - `ChainId` representation is **TBD**
 - Domain-tag registry is **TBD**
