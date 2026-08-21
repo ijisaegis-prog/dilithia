@@ -6,6 +6,7 @@ use core::fmt;
 pub enum SerializationError {
     UnexpectedEof,
     InvalidBool,
+    InvalidOptionTag,
     NonCanonicalUleb128,
     Uleb128Overflow,
 }
@@ -15,6 +16,7 @@ impl fmt::Display for SerializationError {
         match self {
             Self::UnexpectedEof => write!(f, "unexpected end of input"),
             Self::InvalidBool => write!(f, "invalid Bool encoding"),
+            Self::InvalidOptionTag => write!(f, "invalid Option tag"),
             Self::NonCanonicalUleb128 => write!(f, "non-canonical ULEB128 encoding"),
             Self::Uleb128Overflow => write!(f, "ULEB128 value exceeds target bounds"),
         }
