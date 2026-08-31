@@ -1,0 +1,13 @@
+procedure_provenance_format_version=pilot-account-utxo-procedure-provenance/v1
+procedure_provenance_content_identity=NOT_EMBEDDED_EXTERNAL_EVIDENCE_ONLY_CONTENT_IDENTITY
+pre_result_configuration_hash=sha256:0262D9C5222383B6E694C4A9D7E9F3070F40632CD896A40B8F745B9A684AB508
+evidence_source_revision=ba768dbfc4189987f1ea8231f3b1c3ec442f5fda
+source_head_verification=VERIFIED
+source_cleanliness_verification=VERIFIED
+five_input_hash_verifications=VERIFIED
+sha256_implementation_identity=Microsoft.PowerShell.Utility/Get-FileHash/3.1.0.0
+sha256_runtime_identity=WindowsPowerShell/5.1.26100.9168/.NETFramework/4.0.30319.42000
+sha256_command_or_api=Get-FileHash -Algorithm SHA256
+operator_or_procedure_identity=pilot/value-effect-baseline/manual-deterministic-evidence-procedure/v1
+procedure_start_time_utc=2026-08-31T04:57:03Z
+procedure_end_time_utc=2026-08-31T05:23:28Z
