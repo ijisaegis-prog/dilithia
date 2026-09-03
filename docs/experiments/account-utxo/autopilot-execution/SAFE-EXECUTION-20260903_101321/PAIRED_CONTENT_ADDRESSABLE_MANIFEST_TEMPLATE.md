@@ -9,8 +9,9 @@
 | Field | Required value |
 |---|---|
 | manifest schema version | `UNRESOLVED` |
-| manifest identity algorithm | `SHA-256` for exact manifest bytes, excluding only the identity field under a declared canonicalization rule |
-| canonicalization rule | `UNRESOLVED`; must be stated before identity computation |
+| manifest identity algorithm | `SHA-256` |
+| manifest identity | `UNRESOLVED` |
+| canonicalization rule | `UNRESOLVED`; an instance must state: replace only the manifest identity value with 64 zeroes, then hash the exact UTF-8 without BOM bytes |
 | source commit | `UNRESOLVED` |
 | governing artifact path and SHA-256, one row each | `UNRESOLVED` |
 | shared case path and SHA-256 | `UNRESOLVED` |
