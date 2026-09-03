@@ -37,7 +37,7 @@ included. The aggregate is SHA-256 over sorted UTF-8-without-BOM records, each
 encoded as relative name, U+0009, lowercase file SHA-256, and U+000A, including
 the final U+000A.
 
-Aggregate SHA-256: `9818ddecf8462241ba0ed38b5ab64d0d457c92de6260b860f5231aa6a70a39a8`
+Aggregate SHA-256: `2acae61dc648c38a3a1c452d19d2f530766d3bca90d0ed56fa80a23a1d1a3c4e`
 
 | Bound artifact | SHA-256 |
 |---|---|
@@ -49,7 +49,7 @@ Aggregate SHA-256: `9818ddecf8462241ba0ed38b5ab64d0d457c92de6260b860f5231aa6a70a
 | `NEXT_SAFE_WORK_EXECUTION.md` | `059cdb8bd90830b4ceb9ec2e997ef3bec45b43a9378a08163ce28a6b53db3e02` |
 | `OWNER_APPROVAL_BOUNDARY.md` | `9b2a86d25cc8b6ec4321f6e3adbd8e5141ebbc3c2a1f0b3eaccdc0f2c4364c0b` |
 | `PACKAGE_INVENTORY_PROVENANCE_DEFECT_RECORD.md` | `a953c6e956c6ddfe5e029149ef76f51e1cd2bf3afcb291b45c13835b9db9ff63` |
-| `PACKAGE_WIDE_SAFE_CHECK.ps1` | `711a1b95f2a3cd2373f642375f8833c5626cd50710810b70dcc484922f733bfa` |
+| `PACKAGE_WIDE_SAFE_CHECK.ps1` | `bbebba9e45c42872828b9c7c78e176440187b440f18098db3b1999580643610e` |
 | `PROTECTED_DECISION_QUEUE.md` | `a410cbb7475ebe48c7cbf93de603035f075a3afd197943d861fb1a7f7b33e99f` |
 | `README.md` | `a54e225e5c47d8a241bda36bdc2c38f77de7423dc0e1936834dd292c49209356` |
 

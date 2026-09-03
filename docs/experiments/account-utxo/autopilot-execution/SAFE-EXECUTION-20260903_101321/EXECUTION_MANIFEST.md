@@ -17,22 +17,26 @@
 Historical Git inspection, hashing, inventory, language-check, and Cargo
 command claims are executor-reported observations unless independently bound.
 `RESUME_CODE_HEALTH_RECEIPT.md` preserves an unbound inline Cargo transcript;
-it is not a durable receipt and does not establish a current pass. The reported documentary procedure is not a
-bound executed check: its hashes are stale and its exact command, stdout,
-stderr, and exit status were not recorded.
+it is not a durable receipt and does not establish a current Cargo pass. The
+separate package-wide documentary check is currently bound by
+`PACKAGE_WIDE_CHECK_RECEIPT.md`, including its checker identity, governed input
+hashes, exact command, stdout, stderr, exit status, and timestamps.
 
 ## Artifact set
 
 The directory contains earlier execution records, neutral schemas, paired
-skeletons, vectors, a content-addressable paired-manifest template, and a blank
-package-wide check/receipt schema. Summary rows remain summaries. Templates are
-not evidence. The fixed-point and current structural-pass claims are retracted
-in `FIXED_POINT_REPORT.md` and `MECHANICAL_STRUCTURAL_CHECK_RESULTS.md`.
+skeletons, vectors, a content-addressable paired-manifest template, the
+package-wide check/receipt schema, and its current documentary receipt. Summary
+rows remain summaries. Templates are not evidence. Historical structural-pass
+claims remain retracted in `MECHANICAL_STRUCTURAL_CHECK_RESULTS.md`; the
+distinct current package-wide documentary pass is recorded in
+`FIXED_POINT_REPORT.md` and `PACKAGE_WIDE_CHECK_RECEIPT.md`.
 
 ## Declared Markdown inventory
 
-This is the expected path inventory for a future package-wide receipt. It does
-not bind content identities and is not a completeness pass.
+This is the governed 25-input path inventory bound by the current package-wide
+receipt. Content identities and the documentary completeness result are in
+`PACKAGE_WIDE_CHECK_RECEIPT.md`.
 
 | Artifacts |
 |---|
