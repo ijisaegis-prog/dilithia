@@ -61,12 +61,13 @@ also inspected the Rust source for a candidate state-model realization.
    required retraction patterns rather than general status consistency. The
    bounded checker reports groups 1 and 3 through 8 as passing and group 2 and
    the overall check as failing. No package-wide schema pass is claimed.
-8. Corrected the authorization and checker-retention accounts and created the
-   receipt-excluded content binding recorded in
-   `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. Reviewed commit
-   `dccc3afc956bcd07122eba106be503baca122a17` Git-binds the corrected boundary
-   package and directly descends from prior reviewed baseline
-   `d7af9f06464983695bae6e7b18749dc445fa17b1`.
+8. Corrected the authorization, checker-retention, and stale Git-provenance
+   accounts and refreshed the receipt-excluded content binding recorded in
+   `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. Exact reviewed commit
+   `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` identifies the committed package
+   reviewed immediately before this correction. It does not bind the resulting
+   working-tree bytes, and no post-correction Git binding is claimed because
+   this task forbids Git operations.
 
 The checker identity, invocation, environment, timestamps, stream hashes,
 inventory digest, set mismatch, and explicit lexical dispositions are recorded
@@ -97,10 +98,12 @@ The current stopping boundary, without claiming a fixed point, is:
 > present and executable, the corrected non-receipt artifacts have an explicit
 > content binding,
 > the governed inventory and digest are recorded, the two-sided set mismatch is
-> stated, every current lexical match is classified, and the substantive
-> boundary package is Git-bound by reviewed commit
-> `dccc3afc956bcd07122eba106be503baca122a17`, which directly descends from
-> `d7af9f06464983695bae6e7b18749dc445fa17b1`. The old
+> stated, every current lexical match is classified, and exact reviewed commit
+> `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` identifies the committed package
+> reviewed before this correction. The corrected working-tree bytes are bound
+> only by the receipt-excluded SHA-256 record; creating and reviewing a new Git
+> identity is a prerequisite to any future post-correction Git-binding claim
+> and is outside this task's authorization. The old
 > source package was not repaired in this run, and
 > no further material Account-vs-UTXO evidence can be produced from the current
 > frozen inputs without crossing a protected decision, implementation, method,

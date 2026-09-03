@@ -8,11 +8,12 @@ this directory; retain, correct, and execute the exact permitted
 language, provenance, and source-presence checks; classify blockers; and expose
 decision questions. No other non-Markdown artifact and no Git operation was
 authorized within the audit action itself. No Git operation is performed by
-this correction. The review establishes that commit
-`dccc3afc956bcd07122eba106be503baca122a17` contains the corrected boundary
-package, is the clean branch tip matching
-`origin/automation/decision-boundary-20260903_120814`, and directly descends
-from prior reviewed baseline `d7af9f06464983695bae6e7b18749dc445fa17b1`.
+this correction. The review establishes exact commit
+`cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` as the committed package identity
+reviewed immediately before this correction. That commit does not bind the
+resulting working-tree bytes. Creating a new commit and obtaining review are
+prerequisites to a post-correction Git-binding claim; neither is authorized by
+this task.
 
 ## What this run completed without approval
 

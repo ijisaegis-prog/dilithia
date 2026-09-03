@@ -9,10 +9,13 @@
 The first value means all documentary and technical work permitted in this run
 has been executed, including a receipt-excluded content-addressed binding of
 the corrected non-receipt artifacts and all bounded checker groups. This does
-not assert complete implementation of the governing schema. Reviewed commit
-`dccc3afc956bcd07122eba106be503baca122a17` Git-binds the corrected boundary
-package and directly descends from prior reviewed baseline
-`d7af9f06464983695bae6e7b18749dc445fa17b1`. The
+not assert complete implementation of the governing schema. Exact reviewed
+commit `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` identifies the committed
+package reviewed immediately before this correction. It does not bind the
+post-correction working-tree bytes; those bytes have only the receipt-excluded
+SHA-256 binding recorded in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. A new
+commit and review are prerequisites to a post-correction Git-binding claim and
+are outside this task because Git operations are forbidden. The
 second value is limited to
 material comparison progress from the current frozen inputs.
 
@@ -46,8 +49,8 @@ edit, or merge is created by this package.
   disposed in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`; earlier unexplained
   counts are superseded. Other earlier checks retain only their bounded scope.
 - Corrected non-receipt content binding: **EXECUTED**; corrected boundary-package
-  Git binding: **COMPLETE AT REVIEWED COMMIT**
-  `dccc3afc956bcd07122eba106be503baca122a17`.
+  Git binding: **NOT CLAIMED FOR POST-CORRECTION BYTES**. Exact reviewed
+  pre-correction identity: `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a`.
 - Substantive candidate symmetry: **NOT VERIFIED**.
 - Gate 1 direct evidence credit from the structural package: remains limited by
   its own provenance/re-execution declarations.
@@ -60,3 +63,6 @@ This is a protected decision boundary, not a state-model conclusion. The next
 material move belongs to the project owner or applicable protocol authority to
 supply or authorize an upstream decision/profile, after which paired
 implementation and evidence work must still satisfy the frozen neutral method.
+Separately, a post-correction Git-binding claim requires an authorized commit
+and subsequent review; that documentary provenance prerequisite does not
+select a candidate or change the protected decision boundary.
