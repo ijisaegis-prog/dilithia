@@ -6,18 +6,18 @@
 
 `OWNER_OR_PROTOCOL_DECISION_NOW_REQUIRED_FOR_FURTHER_MATERIAL_PROGRESS: YES`
 
-The first value means all documentary and technical work permitted in this run
-has been executed, including a receipt-excluded content-addressed binding of
-the corrected non-receipt artifacts and all bounded checker groups. This does
-not assert complete implementation of the governing schema. Exact reviewed
-commit `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` identifies the committed
-package reviewed immediately before this correction. It does not bind the
-post-correction working-tree bytes; those bytes have only the receipt-excluded
-SHA-256 binding recorded in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. A new
-commit and review are prerequisites to a post-correction Git-binding claim and
-are outside this task because Git operations are forbidden. The
-second value is limited to
-material comparison progress from the current frozen inputs.
+The first value means all work permitted by this task's allowed write set that
+can materially advance the comparison has been executed, including bounded
+checker groups. It does not assert complete implementation of the governing
+schema. The corrected package bytes are committed at exact reviewed clean
+branch tip `84d617835493e0ee5e8da699263b2e1286ffd460`, matching
+`origin/automation/decision-boundary-20260903_120814`; the receipt-excluded
+SHA-256 record in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md` is a separate integrity
+binding. Repair of the older execution manifest and receipt remains
+non-decisional documentary work awaiting authorization to modify that package.
+The second value is limited to material comparison progress from the current
+frozen inputs and does not characterize that documentary repair as a protected
+decision.
 
 ## Process status
 
@@ -49,8 +49,9 @@ edit, or merge is created by this package.
   disposed in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`; earlier unexplained
   counts are superseded. Other earlier checks retain only their bounded scope.
 - Corrected non-receipt content binding: **EXECUTED**; corrected boundary-package
-  Git binding: **NOT CLAIMED FOR POST-CORRECTION BYTES**. Exact reviewed
-  pre-correction identity: `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a`.
+  Git binding: **REVIEWED AT EXACT CLEAN BRANCH TIP**
+  `84d617835493e0ee5e8da699263b2e1286ffd460`, matching
+  `origin/automation/decision-boundary-20260903_120814`.
 - Substantive candidate symmetry: **NOT VERIFIED**.
 - Gate 1 direct evidence credit from the structural package: remains limited by
   its own provenance/re-execution declarations.
@@ -63,6 +64,7 @@ This is a protected decision boundary, not a state-model conclusion. The next
 material move belongs to the project owner or applicable protocol authority to
 supply or authorize an upstream decision/profile, after which paired
 implementation and evidence work must still satisfy the frozen neutral method.
-Separately, a post-correction Git-binding claim requires an authorized commit
-and subsequent review; that documentary provenance prerequisite does not
-select a candidate or change the protected decision boundary.
+Separately, repairing the older execution package's manifest and receipt
+requires authorization to modify that tracked package. It is non-decisional
+documentary work and does not select a candidate or change the protected
+decision boundary.

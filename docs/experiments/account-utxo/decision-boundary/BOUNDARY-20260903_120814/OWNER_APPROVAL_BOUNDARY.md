@@ -8,12 +8,9 @@ this directory; retain, correct, and execute the exact permitted
 language, provenance, and source-presence checks; classify blockers; and expose
 decision questions. No other non-Markdown artifact and no Git operation was
 authorized within the audit action itself. No Git operation is performed by
-this correction. The review establishes exact commit
-`cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` as the committed package identity
-reviewed immediately before this correction. That commit does not bind the
-resulting working-tree bytes. Creating a new commit and obtaining review are
-prerequisites to a post-correction Git-binding claim; neither is authorized by
-this task.
+this correction. The corrected package bytes are already committed at exact
+reviewed clean branch tip `84d617835493e0ee5e8da699263b2e1286ffd460`,
+matching `origin/automation/decision-boundary-20260903_120814`.
 
 ## What this run completed without approval
 
@@ -59,6 +56,8 @@ not waive constitutional or Formal Specification authority requirements.
   matrix without scoring.
 - The old execution-package inventory defect may be corrected only in a run
   authorized to modify that tracked package, followed by a fresh complete
-  package-wide receipt.
+  package-wide receipt. This is safe, non-decisional documentary work awaiting
+  authorization to expand the write scope; it does not require a protected
+  protocol decision.
 
 No answer to any protected question is implied here.

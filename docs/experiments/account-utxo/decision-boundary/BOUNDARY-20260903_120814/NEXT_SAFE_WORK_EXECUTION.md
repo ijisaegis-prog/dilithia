@@ -13,7 +13,7 @@
 | DB-EX-07 | Validate paired-manifest completeness applicability | passed with zero instances: the sole named content-addressable manifest is expressly a template | unresolved template fields are not evidence and are not fabricated |
 | DB-EX-08 | Validate package status consistency | passed: named status records consistently retract the former current-pass/fixed-point claim and retain `S-15` as pending inside the inspected package | does not upgrade old package status |
 | DB-EX-09 | Retain and run the allowed checker; record explicit lexical dispositions | eight bounded checker groups executed; the tool reports groups 1 and 3 through 8 pass and group 2/overall fail, but groups 3, 5, 6, and 8 are narrower than the governing predicates | no package-wide schema pass or durable old-package receipt claimed |
-| DB-EX-10 | Refresh the permitted content binding | sorted SHA-256 identities for every non-receipt Markdown artifact and the exact checker, plus aggregate digest, are recorded in the execution receipt; exact reviewed commit `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` identifies the committed package reviewed before this correction, while no Git binding is claimed for the resulting working-tree bytes | does not repair the old execution-package receipt; a new commit and review are prerequisites to a post-correction Git-binding claim |
+| DB-EX-10 | Refresh the permitted content binding | sorted SHA-256 identities for every non-receipt Markdown artifact and the exact checker, plus aggregate digest, are recorded in the execution receipt; corrected package bytes are committed at exact reviewed clean branch tip `84d617835493e0ee5e8da699263b2e1286ffd460`, matching `origin/automation/decision-boundary-20260903_120814` | does not repair the old execution-package receipt |
 | DB-EX-11 | Reconcile authorization, checker retention, and provenance status | authorization now states the PowerShell exception; checker is locally present and executable; required audit status lines occur exactly once | changes no inspected-package bytes or protocol meaning |
 
 ### Current template-input identities
@@ -85,13 +85,13 @@ mechanically checkable oracles—not mere absence of another template.
 - A durable old-package receipt needs an exact complete inventory, executable
   checker identity, captured streams/status/timestamps, and durable binding.
 
-The corrected non-receipt content binding is complete. Exact reviewed commit
-`cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` identifies the committed package
-reviewed before this correction, but it does not bind the resulting
-working-tree bytes. A new commit and review are prerequisites to a
-post-correction Git-binding claim and are outside this task because Git
-operations are forbidden. The content binding does not cure the old execution
-package's inventory defect.
+The corrected package bytes are committed at exact reviewed clean branch tip
+`84d617835493e0ee5e8da699263b2e1286ffd460`, matching
+`origin/automation/decision-boundary-20260903_120814`; the non-receipt content
+binding is a separate integrity record. It does not cure the old execution
+package's inventory defect. Correcting that manifest and issuing a fresh
+receipt remain safe, non-decisional documentary work awaiting a run authorized
+to modify the older package; they do not require protected semantic input.
 
 ## NO_LONGER_NEEDED
 

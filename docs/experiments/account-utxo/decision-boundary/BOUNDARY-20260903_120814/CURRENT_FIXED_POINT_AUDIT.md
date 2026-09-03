@@ -6,12 +6,15 @@ SAFE_NOW_MEANINGFUL_TASKS_REMAIN: NO
 
 OWNER_OR_PROTOCOL_DECISION_NOW_REQUIRED_FOR_FURTHER_MATERIAL_PROGRESS: YES
 
-These are final values after executing the documentary work that was open at
-the start of this run. They do not mean that every future action literally
-requires an owner decision: implementation and evidence work can proceed once
-their already-identified inputs are supplied. They mean current frozen inputs
-cannot support further material comparison progress without a protected input,
-an authorized candidate-symmetric realization, or missing evidence.
+These values are expressly scoped to this task's allowed write set and to
+material Account-vs-UTXO comparison progress. They do not mean every future
+action requires a protected decision. In particular, repair of the older
+execution package's manifest and receipt is non-decisional documentary work
+awaiting a run authorized to modify that package. Implementation and evidence
+work can also proceed once their already-identified inputs and authorization
+are supplied. Current frozen inputs cannot support further material comparison
+progress without a protected input, an authorized candidate-symmetric
+realization, or missing evidence.
 
 ## Re-evaluation of the prior fixed point
 
@@ -63,11 +66,10 @@ also inspected the Rust source for a candidate state-model realization.
    the overall check as failing. No package-wide schema pass is claimed.
 8. Corrected the authorization, checker-retention, and stale Git-provenance
    accounts and refreshed the receipt-excluded content binding recorded in
-   `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. Exact reviewed commit
-   `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` identifies the committed package
-   reviewed immediately before this correction. It does not bind the resulting
-   working-tree bytes, and no post-correction Git binding is claimed because
-   this task forbids Git operations.
+   `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. The corrected package bytes are
+   committed at exact reviewed clean branch tip
+   `84d617835493e0ee5e8da699263b2e1286ffd460`, matching
+   `origin/automation/decision-boundary-20260903_120814`.
 
 The checker identity, invocation, environment, timestamps, stream hashes,
 inventory digest, set mismatch, and explicit lexical dispositions are recorded
@@ -79,6 +81,8 @@ predicate or that the inventory mismatch is the sole possible failure.
 
 - Correcting the old manifest would modify an existing tracked file, expressly
   forbidden for this run.
+- That repair is non-decisional documentary work awaiting a separately
+  authorized run; it is not blocked on a protected protocol choice.
 - The old package's schema requires a valid current receipt over an exact
   inventory. Branch-local binding of this boundary package does not repair the
   old package's manifest set mismatch and does not create an old-package
@@ -98,13 +102,13 @@ The current stopping boundary, without claiming a fixed point, is:
 > present and executable, the corrected non-receipt artifacts have an explicit
 > content binding,
 > the governed inventory and digest are recorded, the two-sided set mismatch is
-> stated, every current lexical match is classified, and exact reviewed commit
-> `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` identifies the committed package
-> reviewed before this correction. The corrected working-tree bytes are bound
-> only by the receipt-excluded SHA-256 record; creating and reviewing a new Git
-> identity is a prerequisite to any future post-correction Git-binding claim
-> and is outside this task's authorization. The old
-> source package was not repaired in this run, and
+> stated, every current lexical match is classified, and the corrected package
+> bytes are committed at exact reviewed clean branch tip
+> `84d617835493e0ee5e8da699263b2e1286ffd460`, matching
+> `origin/automation/decision-boundary-20260903_120814`. The old source package
+> was not repaired because it is outside this task's allowed write set; that
+> non-decisional documentary repair awaits separate authorization. Within the
+> current authorization and material-comparison scope,
 > no further material Account-vs-UTXO evidence can be produced from the current
 > frozen inputs without crossing a protected decision, implementation, method,
 > or evidence boundary.

@@ -7,7 +7,7 @@
 | Execution-package inventory is not exact | after required receipt exclusion, the 24 inputs and 24 declarations differ: receipt wrongly declared; final dual review omitted | package-wide receipt predicate fails |
 | Old structural PASS record is stale | current input hashes differ from hashes in the invalidated record | only this run's narrow rerun may be cited |
 | No durable old-package receipt | checker identity/streams/status/timestamps/complete inventory were not durably bound | no package-wide PASS may be claimed |
-| Existing package cannot be repaired here | mission forbids modification of existing tracked files | correction requires a separately authorized run |
+| Existing package cannot be repaired here | this task's allowed writes exclude the older execution package | safe, non-decisional correction remains awaiting a separately authorized run; no protected protocol input is prerequisite |
 
 ## Candidate evidence
 
@@ -48,5 +48,7 @@ history do not substitute for candidate behavior or quantitative evidence.
 - Method: profile/corpus/oracle/measurement freeze and pre-result registration.
 - Evidence: actual execution, retained raw artifacts, provenance, review, and
   where required independent reproduction.
-- Documentary correction: a run authorized to modify the existing execution
-  package and bind the new receipt.
+- Documentary correction: safe, non-decisional work remains to repair the
+  existing execution manifest and issue a fresh receipt. Its prerequisite is a
+  run authorized to modify that package, not a protected semantic, candidate,
+  method, or evidence decision.

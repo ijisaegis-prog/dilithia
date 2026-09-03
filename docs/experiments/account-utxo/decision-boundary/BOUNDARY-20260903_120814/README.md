@@ -3,8 +3,9 @@
 **Run:** `BOUNDARY-20260903_120814`
 **Source supplied by owner:** branch `analysis/account-utxo-state-model-comparison`, commit `fe094d20d9e6f13903a2033c74a289ab18605d40`
 **Prior reviewed baseline Git identity:** `d7af9f06464983695bae6e7b18749dc445fa17b1`
-**Exact reviewed pre-correction package Git identity:** `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a`
-**Current-byte binding:** receipt-excluded SHA-256 binding recorded in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`; no post-correction Git binding is claimed
+**Exact reviewed package Git identity:** `84d617835493e0ee5e8da699263b2e1286ffd460`
+**Reviewed branch tip:** `origin/automation/decision-boundary-20260903_120814`
+**Current-byte binding:** the reviewed package bytes are committed at the exact identity above; a receipt-excluded SHA-256 binding is also recorded in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`
 **Classification:** non-normative audit and documentary execution record
 **Protocol adoption effect:** none
 
@@ -29,13 +30,14 @@ not have the complete, current, content-bound package-wide receipt required by
 its own schema. This run cannot repair the old manifest because the mission
 forbids modifying existing tracked files.
 
-The receipt-excluded content-addressed binding covers the corrected current
-non-receipt artifacts. Exact reviewed commit
-`cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a` identifies the committed package
-reviewed immediately before this documentary correction. Because this task
-forbids Git operations, it does not Git-bind the post-correction working-tree
-bytes and no such binding is claimed. Further
-material state-model comparison progress requires protected inputs,
+The corrected package bytes are committed at exact reviewed clean branch tip
+`84d617835493e0ee5e8da699263b2e1286ffd460`, matching
+`origin/automation/decision-boundary-20260903_120814`. The receipt-excluded
+content-addressed binding is a separate artifact-level integrity record. This
+task does not repair the older execution package because that package is outside
+the allowed write set; its manifest and receipt repair remains non-decisional
+documentary work awaiting separate authorization. Further material state-model
+comparison progress from the current frozen inputs requires protected inputs,
 candidate-symmetric implementations, or missing evidence after applicable
 method prerequisites are frozen.
 

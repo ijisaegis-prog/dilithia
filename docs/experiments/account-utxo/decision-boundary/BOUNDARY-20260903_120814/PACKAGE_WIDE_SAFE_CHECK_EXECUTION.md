@@ -10,10 +10,9 @@ are bounded documentary checks rather than a complete implementation of every
 governing predicate. The inspected package
 still fails group 2, so no package-wide pass or durable old-package receipt is
 claimed. This boundary run records a receipt-excluded content binding below.
-Exact reviewed commit `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a`
-identifies the committed package reviewed immediately before this correction.
-It does not bind the resulting working-tree bytes; no post-correction Git
-binding is claimed because this task forbids Git operations.
+The corrected package bytes are committed at exact reviewed clean branch tip
+`84d617835493e0ee5e8da699263b2e1286ffd460`, matching
+`origin/automation/decision-boundary-20260903_120814`.
 
 ## Corrected execution identity
 
@@ -179,27 +178,26 @@ self-hash. No other artifact is excluded. The aggregate is SHA-256 over sorted
 UTF-8-without-BOM records encoded as relative name, U+0009, lowercase file
 SHA-256, and U+000A, including the final U+000A.
 
-Aggregate SHA-256: `9a9e2fecb242c9ba7d53ee9af8a4f04273f7e6569bd67b7cd48fcbe11fd21d04`
+Aggregate SHA-256: `2846694ae78cd62a6348f59b83ed74cf562889730db689649734a981104db96d`
 
 | Bound artifact | SHA-256 |
 |---|---|
-| `CURRENT_FIXED_POINT_AUDIT.md` | `621383e74ea33a0a9580e219612631f1231abed7ba748888fef128c7c6ecb6f9` |
+| `CURRENT_FIXED_POINT_AUDIT.md` | `c70c59568bb6ca0538c9323a88e4c86e2819da92c73193fded373387f6c0c765` |
 | `DECISION_DEPENDENCY_ORDER.md` | `03d715fbf101fb25186d3231a5bfb8a8b44a5fcc73bf2784b5d2f14a58380182` |
 | `DECISION_PREREQUISITE_MATRIX.md` | `1444eb398fcec037a5354b573e70cc5e5ec857db0c41a43e46a1801fb95cb306` |
-| `EVIDENCE_GAPS_AND_BLOCKERS.md` | `ac82bc95895f59eed51e9ddf113aafdece7af260934f10455cf11035991c9e52` |
-| `FINAL_NONDECISIONAL_STATUS.md` | `920b84fab7a2065f043aa06b188ade2d8927e2df1c1b0b7bf1979d413ad8abe6` |
-| `NEXT_SAFE_WORK_EXECUTION.md` | `3079f491400ab40325d35c227f77418e753f7d336dd9c9c81b78eb4e9eb417ce` |
-| `OWNER_APPROVAL_BOUNDARY.md` | `f41f4413bd1206d29aa3021f25465b83b6a49497394a46a1409befc3b8cb31fc` |
+| `EVIDENCE_GAPS_AND_BLOCKERS.md` | `7e7b524cc256551b98573dcb86c36214a121046d5ff07d71ec7d79f7891c7b5f` |
+| `FINAL_NONDECISIONAL_STATUS.md` | `72b017c5885061a6f93653bc9c415b79b978cf4f83aefee94903027dcdaa5d98` |
+| `NEXT_SAFE_WORK_EXECUTION.md` | `5c5bdcd011796b7d1677ac8cf8db7cdd737b78334bfa717282f0e6ea8488a952` |
+| `OWNER_APPROVAL_BOUNDARY.md` | `fe737102e9272f4241de9461fb848ffd4ded9a3f6c62a1e3edc49436c2d447ed` |
 | `PACKAGE_INVENTORY_PROVENANCE_DEFECT_RECORD.md` | `99d1f1e41f715474733a310b4f43e5e8f954e6e3270ec204e2658803a17f2ad1` |
 | `PACKAGE_WIDE_SAFE_CHECK.ps1` | `0121c84c6d9d47aba09fa095ed71557ac297960ca2038c23cbf8bece5a611663` |
 | `PROTECTED_DECISION_QUEUE.md` | `a410cbb7475ebe48c7cbf93de603035f075a3afd197943d861fb1a7f7b33e99f` |
-| `README.md` | `6a1ec5e3d09d68c995201263e47c4697c4d56983a62e255588f3f161bd78c7b8` |
+| `README.md` | `338209e205405572cba2fb56706608cf42fa721b8bd9ffe2c4cc701a12069e83` |
 
 This content binding detects changes to every non-receipt boundary artifact.
-Exact reviewed commit `cc93ea22af6fbce8f50cd5199832b57f6d7a1d1a`
-identifies the committed package reviewed immediately before this correction;
-it does not bind these post-correction working-tree bytes. Creating and
-reviewing a new commit is the prerequisite for a post-correction Git-binding
-claim and is outside this task. Neither that unresolved Git binding nor this
-content binding repairs or supplies a passing receipt for the inspected old
-execution package.
+The corrected package bytes are also Git-bound at exact reviewed clean branch
+tip `84d617835493e0ee5e8da699263b2e1286ffd460`, matching
+`origin/automation/decision-boundary-20260903_120814`. Neither binding repairs
+or supplies a passing receipt for the inspected old execution package. That
+repair is safe, non-decisional documentary work awaiting authorization to
+modify the older package.
