@@ -7,11 +7,11 @@
 ## Result
 
 The run created paired Gate-1 case skeletons, a mirrored evidence-record
-schema, and candidate-neutral Gates 2-9 abstract vectors. It has **not** reached
-a documentary fixed point. The earlier mechanical result is stale and lacks
-durable command/output provenance; all of its pass rows are withdrawn. These
-artifacts expose template shape, but no current bound check verifies it. They do not verify
-substantive candidate symmetry and are not candidate or Gate evidence. No
+schema, and candidate-neutral Gates 2-9 abstract vectors. The inventory and
+provenance defect was repaired and the current documentary package check is
+bound by `PACKAGE_WIDE_CHECK_RECEIPT.md`. The earlier mechanical result remains
+a withdrawn historical record. The current check does not verify
+substantive candidate symmetry and is not candidate or Gate evidence. No
 executable state-model implementation, formal proof, benchmark campaign, or
 independent implementation is credited.
 
@@ -23,8 +23,8 @@ Its historical hash-recomputation claims are executor-reported observations,
 not independently durable verification. The template is not frozen
 registration, a rerun, or evidence. The later continuation created additional
 neutral templates. Package-wide structural, manifest, language,
-metric-leakage, evidence-verb, and provenance checks remain
-`PENDING_REEXECUTION` under `PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md`.
+metric-leakage, evidence-verb, and provenance checks are current only for the
+receipt-bound inventory under `PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md`.
 
 ## Source identity
 

@@ -3,7 +3,8 @@
 Gate-1 paired record skeletons, a mirrored evidence schema, Gates 2-9 abstract
 vectors, and a paired content-addressable manifest template exist. Protected
 fields remain `UNRESOLVED`; templates are not evidence. The earlier mechanical
-pass is withdrawn. Package-wide checks remain ready and pending.
+pass is withdrawn. Its replacement package-wide documentary check is current
+for the receipt-bound inventory.
 
 The triggers below govern later work and are not recommendations for a
 protected choice.
@@ -16,10 +17,10 @@ protected choice.
 | Authenticated-state experimental profile arrives | verify identical external claims/trust/scale inputs before executable checks |
 | Benchmark prerequisites arrive | validate methodology manifest, raw-output retention, repetitions and environment before campaign |
 | Any artifact changes | recompute hashes, dependency checks, reuse eligibility and open-work status |
-| Current correction complete | implement and run the package-wide check; capture exact command/script identity, stdout, stderr, exit status, timestamps, inventory, and hashes |
+| Any documentary input changes | invalidate the current receipt, rerun the package-wide check, and bind the replacement inventory and outputs |
 
-Package-wide documentary verification is meaningful safe-now work and remains
-pending. Substantive candidate symmetry cannot be tested until qualifying
+No presently identified safe, non-decisional documentary task remains in this
+old package. Substantive candidate symmetry cannot be tested until qualifying
 paired mappings or results exist.
 
 Automation must still stop before selecting mechanisms, constants, weights,

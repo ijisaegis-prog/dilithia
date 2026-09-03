@@ -1,58 +1,31 @@
 # Account-vs-UTXO Decision Boundary Audit
 
 **Run:** `BOUNDARY-20260903_120814`
-**Source supplied by owner:** branch `analysis/account-utxo-state-model-comparison`, commit `fe094d20d9e6f13903a2033c74a289ab18605d40`
-**Prior reviewed baseline Git identity:** `d7af9f06464983695bae6e7b18749dc445fa17b1`
-**Exact reviewed package Git identity:** `84d617835493e0ee5e8da699263b2e1286ffd460`
-**Reviewed branch tip:** `origin/automation/decision-boundary-20260903_120814`
-**Current-byte binding:** the reviewed package bytes are committed at the exact identity above; a receipt-excluded SHA-256 binding is also recorded in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`
+**Source supplied by owner:** branch `analysis/account-utxo-state-model-comparison`, historical commit `fe094d20d9e6f13903a2033c74a289ab18605d40`
+**Prior reviewed baseline:** historical commit `d7af9f06464983695bae6e7b18749dc445fa17b1`
+**Current content binding:** receipt-excluded SHA-256 inventory in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`
+**Git identity:** supplied externally by the outer runner and confirmed by the later final dual-review record
 **Classification:** non-normative audit and documentary execution record
 **Protocol adoption effect:** none
 
 ## Outcome
 
-The prior fixed-point claim was correctly retracted by its own final integrated
-package. This audit records bounded structural and documentary observations; it
-does not claim a complete durable execution of every package-wide predicate.
-Corrective safe work ran eight checker-labelled groups, recorded the governed
-inventory digest, and applied bounded lexical and documentary heuristics. The
-checker is not a complete implementation of all governing predicates: groups
-3, 5, 6, and 8 have the limitations stated in the execution record. Its
-overall result remains `FAIL` because group 2's
-inventory check fails set equality: after the required
-receipt exclusion, the 24 governed inputs and 24 declarations differ because
-the receipt is wrongly declared while
-`AUTOPILOT_EXECUTION_FINAL_DUAL_REVIEW.md` is omitted.
+The formerly authorization-blocked repair in
+`SAFE-EXECUTION-20260903_101321` is complete. Its manifest now matches the 25
+governed Markdown inputs, its executed receipt is separately excluded, and the
+receipt records a current documentary pass for the exact bound inventory. The
+repair does not create candidate evidence, Gate credit, substantive symmetry,
+or a state-model decision.
 
-That defect does not select or disadvantage either candidate and does not
-invalidate the narrow final dual-review verdict. It does mean the package does
-not have the complete, current, content-bound package-wide receipt required by
-its own schema. This run cannot repair the old manifest because the mission
-forbids modifying existing tracked files.
+The boundary package does not claim that an exact commit hash embedded in its
+own bytes is the current or final Git-bound commit for those bytes. Its stable
+internal integrity mechanism is the receipt-excluded content hash. The exact
+reviewed Git identity belongs in the external runner record and later final
+dual review.
 
-The corrected package bytes are committed at exact reviewed clean branch tip
-`84d617835493e0ee5e8da699263b2e1286ffd460`, matching
-`origin/automation/decision-boundary-20260903_120814`. The receipt-excluded
-content-addressed binding is a separate artifact-level integrity record. This
-task does not repair the older execution package because that package is outside
-the allowed write set; its manifest and receipt repair remains non-decisional
-documentary work awaiting separate authorization. Further material state-model
-comparison progress from the current frozen inputs requires protected inputs,
-candidate-symmetric implementations, or missing evidence after applicable
-method prerequisites are frozen.
-
-## Documents
-
-- `CURRENT_FIXED_POINT_AUDIT.md` — re-evaluation and current stopping boundary
-- `NEXT_SAFE_WORK_EXECUTION.md` — exact task dispositions and executed checks
-- `PROTECTED_DECISION_QUEUE.md` — questions reserved for owner/protocol authority
-- `DECISION_PREREQUISITE_MATRIX.md` — evidence needed before each decision
-- `DECISION_DEPENDENCY_ORDER.md` — dependency order among questions, not answers
-- `OWNER_APPROVAL_BOUNDARY.md` — precise authority handoff
-- `EVIDENCE_GAPS_AND_BLOCKERS.md` — absent evidence and exact blockers
-- `PACKAGE_INVENTORY_PROVENANCE_DEFECT_RECORD.md` — current-run inventory and
-  non-normative superseding defect record
-- `FINAL_NONDECISIONAL_STATUS.md` — final locked process status
+No safe documentary task presently identified can materially advance the
+comparison. Further progress requires protected inputs, candidate-symmetric
+implementation, frozen method prerequisites, or missing paired evidence.
 
 ## Status lock
 
@@ -62,3 +35,6 @@ method prerequisites are frozen.
 - Account selected: **NO**
 - UTXO selected: **NO**
 - Main merge: **NOT DONE**
+
+Account and UTXO remain co-equal. No candidate is scored, ranked, recommended,
+selected, or adopted.

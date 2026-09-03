@@ -37,6 +37,7 @@ not bind content identities and is not a completeness pass.
 | Artifacts |
 |---|
 | `AUTOPILOT_EXECUTION_BOUNDARY.md` |
+| `AUTOPILOT_EXECUTION_FINAL_DUAL_REVIEW.md` |
 | `BLOCKED_WORK_REGISTRY.md` |
 | `CROSS_GATE_EXECUTED_CHECKS.md` |
 | `DECISION_QUEUE_UNCHANGED.md` |
@@ -60,6 +61,10 @@ not bind content identities and is not a completeness pass.
 | `REPOSITORY_VERIFICATION_RESULTS.md` |
 | `RESUME_CODE_HEALTH_RECEIPT.md` |
 | `SAFE_TASK_CLASSIFICATION.md` |
+
+`PACKAGE_WIDE_CHECK_RECEIPT.md` is the current execution receipt and is not a
+governed input. Its exclusion is required by the receipt schema and is not an
+inventory omission. No other Markdown file is excluded.
 
 ## Claim limits
 

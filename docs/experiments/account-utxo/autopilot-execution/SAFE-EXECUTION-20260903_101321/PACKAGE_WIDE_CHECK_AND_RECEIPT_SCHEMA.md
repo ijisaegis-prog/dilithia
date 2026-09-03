@@ -1,7 +1,8 @@
 # Package-Wide Check and Receipt Schema
 
-> **SPECIFICATION AND BLANK RECEIPT ONLY.** No check execution or pass is
-> claimed by this document.
+> **SPECIFICATION ONLY.** This document is a governed checker input, not an
+> execution receipt and not candidate or Gate evidence. A completed receipt is
+> recorded separately in `PACKAGE_WIDE_CHECK_RECEIPT.md`.
 
 ## Scope binding
 
@@ -15,8 +16,10 @@ invalidates the receipt.
 ## Required predicate groups
 
 1. Re-run all predicates in `MECHANICAL_STRUCTURAL_CHECK_SPECIFICATION.md`.
-2. Require every inventory entry expected by `EXECUTION_MANIFEST.md`; reject
-   missing, extra, duplicate, or unhashed entries.
+2. Require every governed inventory entry expected by `EXECUTION_MANIFEST.md`;
+   reject missing, extra, duplicate, or unhashed governed entries. The one
+   explicitly excluded receipt is permitted in the physical directory but is
+   not a governed input.
 3. Validate every instantiated paired manifest against
    `PAIRED_CONTENT_ADDRESSABLE_MANIFEST_TEMPLATE.md`: required fields, digest
    syntax, resolvable paths, recomputed hashes, co-equal Account/UTXO binding
@@ -42,28 +45,29 @@ invalidates the receipt.
 8. Validate status consistency across `README.md`, `EXECUTION_MANIFEST.md`,
    `SAFE_TASK_CLASSIFICATION.md`, `FIXED_POINT_REPORT.md`, and result records.
 
-## Durable execution receipt — blank
+## Required durable execution-receipt fields
 
 | Field | Value |
 |---|---|
-| receipt status | `NOT_EXECUTED` |
-| receipt ID and receipt-document SHA-256 | `UNRESOLVED` |
-| durable binding location or mechanism | `UNRESOLVED` |
-| checker script path and SHA-256 | `UNRESOLVED` |
-| exact executable command and argument vector | `UNRESOLVED` |
-| working directory | `UNRESOLVED` |
-| operating-system and execution-environment identity | `UNRESOLVED` |
-| relevant runtime and toolchain identities | `UNRESOLVED` |
-| input inventory path and SHA-256 | `UNRESOLVED` |
-| explicit excluded receipt path | `UNRESOLVED` |
-| stdout path and SHA-256 | `UNRESOLVED` |
-| stderr path and SHA-256 | `UNRESOLVED` |
-| exit status | `UNRESOLVED` |
-| start and end timestamps with timezone | `UNRESOLVED` |
-| predicate-by-predicate output | `UNRESOLVED` |
+| receipt status | required |
+| receipt ID and receipt-document identity | required; an explicitly defined, recomputable canonical receipt hash may blank only its own identity value |
+| durable binding location or mechanism | required |
+| checker script path and SHA-256 | required |
+| exact executable command and argument vector | required |
+| working directory | required |
+| operating-system and execution-environment identity | required |
+| relevant runtime and toolchain identities | required |
+| input inventory path and SHA-256 | required |
+| explicit excluded receipt path | required |
+| stdout path and SHA-256 | required |
+| stderr path and SHA-256 | required |
+| exit status | required |
+| start and end timestamps with timezone | required |
+| predicate-by-predicate output | required |
 
 The receipt may be marked current only when every required field is populated,
 all identities recompute, every predicate output is captured, and the receipt
-identity is fixed by the named durable binding mechanism. A mutable inline file
-in an untracked directory is insufficient by itself. A successful package check
+identity is fixed by the named durable binding mechanism. The receipt must
+contain or identify the exact checker source and captured streams; a status
+assertion without those materials is insufficient. A successful package check
 remains documentary validation, never candidate or Gate evidence.

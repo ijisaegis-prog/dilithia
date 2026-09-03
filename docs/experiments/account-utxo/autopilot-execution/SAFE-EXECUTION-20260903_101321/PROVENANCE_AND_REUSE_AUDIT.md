@@ -43,3 +43,11 @@ manifest, both mappings and binding, harness/generator, commands, environment,
 toolchain, corpus seed, outputs, summaries, reviewers, exclusions, evidence
 class, and claim scope. A post-result manifest is audit metadata, not a
 substitute for required pre-result registration.
+
+## Package inventory repair
+
+The current documentary receipt repairs package-level inventory provenance
+only. It adds the previously omitted historical final dual-review file to the
+governed inventory and separates the governed receipt schema from the excluded
+executed receipt. This repair does not alter or upgrade candidate evidence,
+historical verdicts, reuse eligibility, or Gate disposition.
