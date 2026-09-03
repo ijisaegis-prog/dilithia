@@ -27,10 +27,11 @@ input whose identity still matches.
 | Item | Status |
 |---|---|
 | Earlier predicate results | `WITHDRAWN_STALE` |
-| `S-15` | `PENDING_REEXECUTION` |
-| Structural symmetry | `NOT_CURRENTLY_VERIFIED` |
+| `S-15` | `EXECUTED_SAFE_NOW` only under the separate current package-wide receipt; this historical record remains stale |
+| Structural symmetry | `PASS_STRUCTURAL` only for the exact inputs and predicate outputs bound by the separate current package-wide receipt |
 | Substantive Account/UTXO symmetry | `NOT_CHECKED_SEMANTICALLY` |
-| Package-wide lint and provenance validation | `PENDING_REEXECUTION` |
+| Package-wide lint and provenance validation | `CURRENT_PASS_DOCUMENTARY` only under `PACKAGE_WIDE_CHECK_RECEIPT.md`; not established by this stale record |
 
-No replacement pass is claimed. A future receipt must satisfy
-`PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md` and bind the then-current inventory.
+This record claims no replacement pass. The separate replacement receipt must
+satisfy `PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md` and bind its exact current
+inventory; any later governed-input edit requires another execution.

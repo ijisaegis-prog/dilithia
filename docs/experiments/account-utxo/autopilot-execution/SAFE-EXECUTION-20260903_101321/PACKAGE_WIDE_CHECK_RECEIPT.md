@@ -1,180 +1,62 @@
 # Package-Wide Documentary Check Receipt
 
-> **DOCUMENTARY VALIDATION ONLY.** This receipt is not a template, checker,
-> state-model result, candidate evidence, Gate evidence, recommendation, or
-> selection. Account and UTXO remain co-equal and unranked.
+> **DOCUMENTARY VALIDATION ONLY.** This receipt is not candidate evidence,
+> Gate evidence, a recommendation, or a selection. Account and UTXO remain
+> co-equal and unranked.
 
 ## Receipt fields
 
 | Field | Value |
 |---|---|
 | receipt status | `CURRENT_PASS_DOCUMENTARY` |
-| receipt ID and receipt-document identity | `SHA256-CANONICAL-CF6782508C95F1A041F342D376D3B336CBC44804BB3F2F5615A4F1F9D6032A8E` |
-| durable binding location or mechanism | this repository path plus the canonical receipt identity defined below |
-| checker script path and SHA-256 | this file, `Checker source` fenced block; `3EFBAC08DD08A00A0DB5C7BE443D06090841D7AD66ADE795DB3B18D64F9F6F4A` |
-| exact executable command and argument vector | `powershell.exe -NoLogo -NoProfile -NonInteractive -Command <the invocation recorded below>` |
-| working directory | repository root |
-| operating-system and execution-environment identity | `Microsoft Windows 10.0.26200`; process environment inherited from repository-root PowerShell session |
-| relevant runtime and toolchain identities | `Windows PowerShell 5.1.26100.9168`; .NET runtime used by that PowerShell process |
-| input inventory path and SHA-256 | this file, `Governed input inventory`; `CB806E2EA0FA98B58A8EEDD4C15BA8FB0C30A0D039AEB3A447A6970208119E60` |
-| explicit excluded receipt path | `PACKAGE_WIDE_CHECK_RECEIPT.md` |
-| stdout path and SHA-256 | this file, `Captured stdout`; canonical LF-terminated UTF-8 capture `2CA37F3135B0DA9D69E5D391DFDD2653705A23278A22CF6AA5812EEB0D200F5F` |
-| stderr path and SHA-256 | this file, `Captured stderr`; SHA-256 of zero bytes `E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855` |
+| receipt ID and receipt-document identity | `SHA256-CANONICAL-9B495917CF4FBF617F27646B4D172AA46855136784E6A63B9E78C04F4C77D46C` |
+| durable binding location or mechanism | this repository path, the embedded decoded captures, their byte-encoding rules, and the canonical receipt identity below |
+| checker script path and SHA-256 | `docs/experiments/account-utxo/decision-boundary/BOUNDARY-20260903_120814/PACKAGE_WIDE_SAFE_CHECK.ps1`; `711A1B95F2A3CD2373F642375F8833C5626CD50710810B70DCC484922F733BFA` |
+| exact executable command and argument vector | the complete literal host command in `Exact invocation and capture procedure` |
+| working directory | `C:\Users\PC\AppData\Local\Temp\Dilithia_Decision_Boundary_Worktree_20260903_120814` |
+| operating-system and execution-environment identity | `Microsoft Windows NT 10.0.26200.0`; child checker and capture host were clean `powershell.exe -NoLogo -NoProfile -NonInteractive` processes |
+| relevant runtime and toolchain identities | Windows PowerShell `5.1.26100.9168`; CLR `4.0.30319.42000` |
+| input inventory path and SHA-256 | this file, `Captured stdout` → `inventory.input_entries`; `b1bd8ed641be917f5f666ea5a80c12e5477e534ce98f8ddb0f97c3bf3e091110` |
+| explicit excluded receipt path | `PACKAGE_WIDE_CHECK_RECEIPT.md`; no other exclusions |
+| stdout path and SHA-256 | execution capture `C:\Users\PC\AppData\Local\Temp\SAFE-EXECUTION-20260903_101321.stdout.json`, reproduced decoded below; `85D8E434DB6AAE4F87294FADE4A0DDED736778900665451F926BE560A8D1BB76` over 50,406 captured bytes |
+| stderr path and SHA-256 | execution capture `C:\Users\PC\AppData\Local\Temp\SAFE-EXECUTION-20260903_101321.stderr.txt`, reproduced below; SHA-256 of zero bytes `E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855` |
 | exit status | `0` |
-| start and end timestamps with timezone | `2026-09-03T22:45:03.0555987+09:00`; `2026-09-03T22:45:03.5481795+09:00` |
-| predicate-by-predicate output | this file, `Captured stdout` |
+| start and end timestamps with timezone | `2026-09-03T23:00:57.6260638+09:00`; `2026-09-03T23:00:59.3571606+09:00` |
+| predicate-by-predicate output | this file, `Captured stdout`; groups 1–8 and every subpredicate/hit disposition are present |
 
 The canonical receipt identity is SHA-256 over the exact receipt bytes after
-replacing only the value inside the backticks in the `receipt ID and
-receipt-document identity` row with `CANONICAL-IDENTITY`. This avoids a
-self-hash while leaving every other receipt byte bound.
+replacing only the value inside the backticks in the
+`receipt ID and receipt-document identity` row with
+`CANONICAL-IDENTITY`. The receipt is UTF-8 without BOM with LF line endings.
 
-## Exact invocation
+## Exact invocation and capture procedure
 
-The checker was invoked by reading the UTF-8 text between the checker markers
-below, constructing a PowerShell script block, and invoking it with the package
-path as its sole argument. The execution host captured the emitted stream;
-the captured bytes are reproduced below and content-identified in the receipt
-fields.
+The following is the complete command actually issued from the recorded
+working directory. The outer clean Windows PowerShell host recorded timestamps,
+started a second clean Windows PowerShell process with the exact checker and
+package argument vector, redirected success and error streams separately,
+recorded the child exit status, and serialized the host metadata.
 
 ```powershell
-$pkg = Resolve-Path -LiteralPath 'docs/experiments/account-utxo/autopilot-execution/SAFE-EXECUTION-20260903_101321'; $receipt = Join-Path $pkg 'PACKAGE_WIDE_CHECK_RECEIPT.md'; $text = Get-Content -LiteralPath $receipt -Raw; $source = [regex]::Match($text, '(?s)<!-- CHECKER-SOURCE-BEGIN -->\r?\n```powershell\r?\n(.*?)\r?\n```\r?\n<!-- CHECKER-SOURCE-END -->').Groups[1].Value; $start = Get-Date -Format o; $output = @(& ([scriptblock]::Create($source)) -PackagePath $pkg.Path 2>&1); $code = if ($?) { 0 } else { 1 }; $end = Get-Date -Format o
+powershell.exe -NoLogo -NoProfile -NonInteractive -Command "& { `$start=[DateTimeOffset]::Now.ToString('o'); & powershell.exe -NoLogo -NoProfile -NonInteractive -File 'C:\Users\PC\AppData\Local\Temp\Dilithia_Decision_Boundary_Worktree_20260903_120814\docs\experiments\account-utxo\decision-boundary\BOUNDARY-20260903_120814\PACKAGE_WIDE_SAFE_CHECK.ps1' -PackagePath 'C:\Users\PC\AppData\Local\Temp\Dilithia_Decision_Boundary_Worktree_20260903_120814\docs\experiments\account-utxo\autopilot-execution\SAFE-EXECUTION-20260903_101321' 1> 'C:\Users\PC\AppData\Local\Temp\SAFE-EXECUTION-20260903_101321.stdout.json' 2> 'C:\Users\PC\AppData\Local\Temp\SAFE-EXECUTION-20260903_101321.stderr.txt'; `$code=`$LASTEXITCODE; `$end=[DateTimeOffset]::Now.ToString('o'); [pscustomobject]@{start=`$start;end=`$end;exit_status=`$code} | ConvertTo-Json -Compress | Set-Content -LiteralPath 'C:\Users\PC\AppData\Local\Temp\SAFE-EXECUTION-20260903_101321.meta.json' -Encoding UTF8; exit `$code }"
 ```
 
-The execution host captured the resulting output stream. Because the checker
-emitted no error record, the separately captured stderr byte sequence is empty.
+Capture metadata:
 
-## Checker source
-
-<!-- CHECKER-SOURCE-BEGIN -->
-```powershell
-param([Parameter(Mandatory=$true)][string]$PackagePath)
-$ErrorActionPreference = 'Stop'
-$receipt = 'PACKAGE_WIDE_CHECK_RECEIPT.md'
-$files = @(Get-ChildItem -LiteralPath $PackagePath -File -Filter '*.md' |
-    Where-Object Name -ne $receipt | Sort-Object Name)
-$manifestPath = Join-Path $PackagePath 'EXECUTION_MANIFEST.md'
-$manifestText = Get-Content -LiteralPath $manifestPath -Raw
-$declared = @([regex]::Matches($manifestText, '(?m)^\| `([^`]+\.md)` \|$') |
-    ForEach-Object { $_.Groups[1].Value } | Sort-Object)
-$actual = @($files.Name)
-$state = [pscustomobject]@{ Failures = 0 }
-function Emit([string]$Id,[bool]$Pass,[string]$Detail) {
-    if (-not $Pass) { $state.Failures++ }
-    $state = if ($Pass) { 'PASS_DOCUMENTARY' } else { 'FAIL_DOCUMENTARY' }
-    Write-Output ("{0}|{1}|{2}" -f $Id,$state,$Detail)
-}
-Emit 'P01_MANIFEST_COMPLETENESS' (($declared -join "`n") -ceq ($actual -join "`n"))
-    ("declared={0};actual={1};excluded={2}" -f $declared.Count,$actual.Count,$receipt)
-Emit 'P02_NO_DUPLICATE_MANIFEST_ENTRIES' (($declared | Select-Object -Unique).Count -eq $declared.Count)
-    ("entries={0}" -f $declared.Count)
-$inventoryLines = @($files | ForEach-Object {
-    '{0}  {1}' -f (Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash,$_.Name
-})
-$inventoryText = ($inventoryLines -join "`n") + "`n"
-$sha256 = [Security.Cryptography.SHA256]::Create()
-$inventoryHash = ([BitConverter]::ToString($sha256.ComputeHash(
-    [Text.Encoding]::UTF8.GetBytes($inventoryText)))).Replace('-','')
-Write-Output ("INVENTORY_SHA256|{0}" -f $inventoryHash)
-$inventoryLines | ForEach-Object { Write-Output ("INVENTORY|{0}" -f $_) }
-$schema = Get-Content -LiteralPath (Join-Path $PackagePath 'NEUTRAL_PAIRED_EVIDENCE_RECORD_SCHEMA.md') -Raw
-$accountSection = [regex]::Match($schema,'(?s)### Account slot(.*?)### UTXO slot').Groups[1].Value
-$utxoSection = [regex]::Match($schema,'(?s)### UTXO slot(.*?)## Structural predicates').Groups[1].Value
-function Keys([string]$section) {
-  @([regex]::Matches($section,'(?m)^\| `([^`]+)`(?: / `([^`]+)`)? \|') | ForEach-Object {
-    $_.Groups[1].Value
-    if($_.Groups[2].Success){$_.Groups[2].Value}
-  } | Where-Object {$_ -ne 'candidate_slot'})
-}
-$accountKeys = @(Keys $accountSection)
-$utxoKeys = @(Keys $utxoSection)
-Emit 'P03_SCHEMA_MIRROR' (($accountKeys -join "`n") -ceq ($utxoKeys -join "`n")) ("keys={0}" -f $accountKeys.Count)
-$skeleton = Get-Content -LiteralPath (Join-Path $PackagePath 'GATE1_PAIRED_CASE_RECORD_SKELETONS.md') -Raw
-$sections = @([regex]::Matches($skeleton,'(?m)^### G1-[A-Z0-9-]+'))
-$caseLines = @($skeleton -split "`r?`n" | Where-Object {$_ -match '^`SHARED_CONTRACT:'})
-$caseShape = $sections.Count -eq 16 -and $caseLines.Count -eq 16
-foreach($line in $caseLines){$caseShape = $caseShape -and ([regex]::Matches($line,'ACCOUNT_SLOT:').Count -eq 1) -and ([regex]::Matches($line,'UTXO_SLOT:').Count -eq 1) -and $line.Contains('PROFILE_SET:') -and $line.Contains('PROVENANCE:') -and $line.Contains('EVIDENCE:NONE')}
-Emit 'P04_GATE1_CASE_COVERAGE' $caseShape ("headings={0};records={1}" -f $sections.Count,$caseLines.Count)
-$vectors = Get-Content -LiteralPath (Join-Path $PackagePath 'DETERMINISTIC_ABSTRACT_VECTOR_TEMPLATES.md') -Raw
-$vectorLines = @($vectors -split "`r?`n" | Where-Object {$_ -match '^`VECTOR_ID:'})
-$vectorMirror=$true;$reject=$true;$reorg=$true;$gates=@()
-foreach($line in $vectorLines){
-  $vectorMirror=$vectorMirror -and ([regex]::Matches($line,'ACCOUNT_SLOT:NO_RESULT').Count -eq 1) -and ([regex]::Matches($line,'UTXO_SLOT:NO_RESULT').Count -eq 1) -and $line.Contains('SHARED_INPUT:') -and $line.Contains('EXPECTED_EXTERNAL_RELATION:') -and $line.Contains('PROFILE_SET:') -and $line.Contains('PROVENANCE:')
-  if($line.Contains('OUTCOME_CLASS:REJECTION')){$reject=$reject -and $line.Contains('ZERO_CANONICAL_EFFECT')}
-  if($line -match 'VECTOR_ID:[^` ]*REORG'){$reorg=$reorg -and $line.Contains('REORG_PROFILE_BRANCH:REQUIRED_EXPLICIT_COMPATIBLE_PROFILE_UNRESOLVED') -and $line.Contains('ROLLBACK_PRIOR:UNRESOLVED_PROTECTED_DECISION') -and $line.Contains('EXPECTED_EXTERNAL_RELATION:UNRESOLVED_PROTECTED_DECISION')}
-  if($line -match 'GATE:(\d+)'){$gates += [int]$Matches[1]}
-}
-Emit 'P05_VECTOR_MIRROR' $vectorMirror ("vectors={0}" -f $vectorLines.Count)
-Emit 'P06_REJECTION_STRUCTURE' $reject 'all rejection vectors require zero canonical effect'
-Emit 'P07_REORGANIZATION_NEUTRALITY' $reorg 'all reorganization vectors retain unresolved compatible-profile branch'
-Emit 'P08_GATE_COVERAGE' ((2..9 | Where-Object {$_ -notin $gates}).Count -eq 0) ("gates={0}" -f (($gates|Sort-Object -Unique) -join ','))
-Emit 'P09_TEMPLATE_BOUNDARY' ($vectorMirror -and $caseShape -and ($caseLines | Where-Object {$_ -notmatch 'EVIDENCE:NONE'}).Count -eq 0) 'NO_RESULT vectors; EVIDENCE:NONE skeletons'
-$allText = @($files | ForEach-Object {Get-Content -LiteralPath $_.FullName -Raw}) -join "`n"
-$selectionHits = [regex]::Matches($allText,'(?im)^.*\b(score|scoring|weight|weighting|rank|ranking|prefer|preference|recommend|recommendation|adopt|adoption|select|selected|selection)\w*\b.*$')
-Emit 'P10_SELECTION_LANGUAGE_REVIEW' $true ("reviewed_hits={0};allowlist=negated-boundaries,quoted-historical-review,specification-and-task-vocabulary,generic-noncandidate-selection-fields" -f $selectionHits.Count)
-Emit 'P11_CANDIDATE_NATIVE_METRIC_LEAKAGE' $true 'reviewed package contains shared dimensions or mirrored candidate slots; no unpaired candidate success criterion identified'
-Emit 'P12_EVIDENCE_VERB_AND_PROVENANCE' $true 'historical claims retain executor-reported/stale classifications; current documentary claims cite this receipt'
-Emit 'P13_STATUS_CONSISTENCY' ($allText.Contains('NOT STARTED') -and $allText.Contains('NOT MADE')) 'decision safeguards retained; S-15 current only as documentary validation'
-Emit 'P14_NOT_CHECKED_SEMANTICALLY' $true 'mandatory boundary; no candidate semantics checked'
-Write-Output ("SUMMARY|failures={0};governed_inputs={1}" -f $state.Failures,$files.Count)
-if($state.Failures -ne 0){throw "documentary predicate failures=$($state.Failures)"}
+```json
+{"start":"2026-09-03T23:00:57.6260638+09:00","end":"2026-09-03T23:00:59.3571606+09:00","exit_status":0}
 ```
-<!-- CHECKER-SOURCE-END -->
 
-## Governed input inventory
-
-The governed inventory consists of the 25 `INVENTORY|<SHA-256>  <path>` rows
-in `Captured stdout`, sorted ordinally by relative path. The canonical UTF-8
-inventory is each `<SHA-256>  <path>` pair followed by LF, including the final
-LF. Its SHA-256 is
-`CB806E2EA0FA98B58A8EEDD4C15BA8FB0C30A0D039AEB3A447A6970208119E60`.
+Windows PowerShell 5.1 redirection produced the stdout byte capture as UTF-16LE
+with BOM and a terminating CRLF. The JSON below is its exact decoded content;
+those rules reproduce the byte stream and its stated SHA-256. Stderr was zero
+bytes.
 
 ## Captured stdout
 
-```text
-P01_MANIFEST_COMPLETENESS|PASS_DOCUMENTARY|
-declared=25;actual=25;excluded=PACKAGE_WIDE_CHECK_RECEIPT.md
-P02_NO_DUPLICATE_MANIFEST_ENTRIES|PASS_DOCUMENTARY|
-entries=25
-INVENTORY_SHA256|CB806E2EA0FA98B58A8EEDD4C15BA8FB0C30A0D039AEB3A447A6970208119E60
-INVENTORY|69CB88BD36865C16016B998FFBD7D5D18D28598E8A394F5DD37A15A3A1DBB262  AUTOPILOT_EXECUTION_BOUNDARY.md
-INVENTORY|17B07D3CD056014FF3EBABF77435F3D54BA38F82250D56FC908871687E5E5F40  AUTOPILOT_EXECUTION_FINAL_DUAL_REVIEW.md
-INVENTORY|97D258696197D245C38C3B06010A6B81884E84BCB7F0B53BDF3DCFFF7C186B0B  BLOCKED_WORK_REGISTRY.md
-INVENTORY|323659CA5AA629C2066595937A4429D1AC8B1D50C081DBB6E1946FD5F51A39EB  CROSS_GATE_EXECUTED_CHECKS.md
-INVENTORY|8A8049A935BBCCED5EA3A665F2230DC62DBF57B4283F791E076DAC367F4F108E  DECISION_QUEUE_UNCHANGED.md
-INVENTORY|21828397C4332CEC31FF1CD3C9197F0E7361B86645584537E171DF2356E4D8DF  DETERMINISTIC_ABSTRACT_VECTOR_TEMPLATES.md
-INVENTORY|F62887790EDDA1C3340F6F0BD478D784FE40641A87379F1FA059D02915CD2106  EXECUTION_MANIFEST.md
-INVENTORY|8347E9C41DCEBBAE773FD417D4A7467F85176F2F546C8435B331AA41BBF15530  FIXED_POINT_REPORT.md
-INVENTORY|739FECABA360608ED9A09F897FCD289119718070237CC8356109C5D0449DBFBA  GATE1_DEFERRED_CASE_MANIFESTS.md
-INVENTORY|4E19C26FBCC164903BFE61BD733A7E6E2D77E6298A9DD447F49CABA62DE66100  GATE1_EXECUTED_STRUCTURAL_CASES.md
-INVENTORY|CC7BA847CAD0310C622A963FA9AABEA54D565189963CCA8CB3A262E1E0842B8F  GATE1_NEUTRAL_PROFILE_MATRIX.md
-INVENTORY|511101325163561B45AAABF9E0AB5A997B9450F26EFB978F6C963C5F1A356CB2  GATE1_PAIRED_CASE_RECORD_SKELETONS.md
-INVENTORY|E36531FCE5F06769AA243815A8FB15E6985BCA04FAB7BF62B8A13CE5EEA88982  GATE1_RERUN_PRE_RESULT_MANIFEST_TEMPLATE.md
-INVENTORY|16165C56316B34ED681AAFD86F862E294CBDD79192B4B0C2953150EAF78C1F00  GATE2_9_EXECUTED_PREPARATION.md
-INVENTORY|59AC104618283D236B7E880AE02485F5F7B74624A690D030D1C9CA897F3309B0  MECHANICAL_STRUCTURAL_CHECK_RESULTS.md
-INVENTORY|7BCD140624501798028EA37DF7FAD207438C0839929AA2D72BDCF98D2F9111AA  MECHANICAL_STRUCTURAL_CHECK_SPECIFICATION.md
-INVENTORY|4797EAE658877CB326013FE087D0BD766E1D23E824CDF4218F144F5A73BAC847  NEUTRAL_PAIRED_EVIDENCE_RECORD_SCHEMA.md
-INVENTORY|64324AB7BD22CF5E7AB0B18637C084D584AE7F07A40B7EC95E356170D36CF831  NEXT_SAFE_AUTOMATION_QUEUE.md
-INVENTORY|8945D7FED92C0476C52FFEF25917CAAB810399D9DBFD0F4A7148450018CD499E  PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md
-INVENTORY|6D7164872E8AAFB43BD23B853975E3AC8AED68E53D0A148CD0F4A4A18387C8BE  PAIRED_CONTENT_ADDRESSABLE_MANIFEST_TEMPLATE.md
-INVENTORY|EEEA0EA64393B6E77D0F2FA463E00CFD4CDFCA5407AE76B2325337EDEDCEEA0F  PROVENANCE_AND_REUSE_AUDIT.md
-INVENTORY|F9F2E7014B87FDF7CFDB13FC0E3C85D4B2F9221151228E1A443FF98DD1951571  README.md
-INVENTORY|DFADD07AD7A46CD65E08FFF5F582447B3E3612E57B6542FF105211F650F76D46  REPOSITORY_VERIFICATION_RESULTS.md
-INVENTORY|22FDE0D23B1A48318F1E4E6BC6D5F142C79C7E24DF12AD57545BD4EC2EFE5D5B  RESUME_CODE_HEALTH_RECEIPT.md
-INVENTORY|A80AB8A3B40E4DA5B50F6196042E2AACA4B8F938C872AE6E4080ECF9B29F38CA  SAFE_TASK_CLASSIFICATION.md
-P03_SCHEMA_MIRROR|PASS_DOCUMENTARY|keys=17
-P04_GATE1_CASE_COVERAGE|PASS_DOCUMENTARY|headings=16;records=16
-P05_VECTOR_MIRROR|PASS_DOCUMENTARY|vectors=14
-P06_REJECTION_STRUCTURE|PASS_DOCUMENTARY|all rejection vectors require zero canonical effect
-P07_REORGANIZATION_NEUTRALITY|PASS_DOCUMENTARY|all reorganization vectors retain unresolved compatible-profile branch
-P08_GATE_COVERAGE|PASS_DOCUMENTARY|gates=2,3,4,5,6,7,8,9
-P09_TEMPLATE_BOUNDARY|PASS_DOCUMENTARY|NO_RESULT vectors; EVIDENCE:NONE skeletons
-P10_SELECTION_LANGUAGE_REVIEW|PASS_DOCUMENTARY|reviewed_hits=43;allowlist=negated-boundaries,quoted-historical-review,specification-and-task-vocabulary,generic-noncandidate-selection-fields
-P11_CANDIDATE_NATIVE_METRIC_LEAKAGE|PASS_DOCUMENTARY|reviewed package contains shared dimensions or mirrored candidate slots; no unpaired candidate success criterion identified
-P12_EVIDENCE_VERB_AND_PROVENANCE|PASS_DOCUMENTARY|historical claims retain executor-reported/stale classifications; current documentary claims cite this receipt
-P13_STATUS_CONSISTENCY|PASS_DOCUMENTARY|decision safeguards retained; S-15 current only as documentary validation
-P14_NOT_CHECKED_SEMANTICALLY|PASS_DOCUMENTARY|mandatory boundary; no candidate semantics checked
-SUMMARY|failures=0;governed_inputs=25
+```json
+{"check_scope":"C:\\Users\\PC\\AppData\\Local\\Temp\\Dilithia_Decision_Boundary_Worktree_20260903_120814\\docs\\experiments\\account-utxo\\autopilot-execution\\SAFE-EXECUTION-20260903_101321","timestamp":"2026-09-03T23:00:59.2485189+09:00","inventory":{"serialization":"UTF-8 without BOM: relative-name + U+0009 + lowercase SHA-256 + U+000A; final U+000A included","explicit_excluded_receipt":"PACKAGE_WIDE_CHECK_RECEIPT.md","other_exclusions":[],"input_inventory_sha256":"b1bd8ed641be917f5f666ea5a80c12e5477e534ce98f8ddb0f97c3bf3e091110","input_entries":["AUTOPILOT_EXECUTION_BOUNDARY.md\t69cb88bd36865c16016b998ffbd7d5d18d28598e8a394f5dd37a15a3a1dbb262","AUTOPILOT_EXECUTION_FINAL_DUAL_REVIEW.md\t17b07d3cd056014ff3ebabf77435f3d54ba38f82250d56fc908871687e5e5f40","BLOCKED_WORK_REGISTRY.md\t97d258696197d245c38c3b06010a6b81884e84bcb7f0b53bdf3dcfff7c186b0b","CROSS_GATE_EXECUTED_CHECKS.md\t323659ca5aa629c2066595937a4429d1ac8b1d50c081dbb6e1946fd5f51a39eb","DECISION_QUEUE_UNCHANGED.md\t8a8049a935bbcced5ea3a665f2230dc62dbf57b4283f791e076dac367f4f108e","DETERMINISTIC_ABSTRACT_VECTOR_TEMPLATES.md\t21828397c4332cec31ff1cd3c9197f0e7361b86645584537e171df2356e4d8df","EXECUTION_MANIFEST.md\tf62887790edda1c3340f6f0bd478d784fe40641a87379f1fa059d02915cd2106","FIXED_POINT_REPORT.md\t779ee388480be94869ee4f999bb73f28d63e01f1904bd919154b0183882bc705","GATE1_DEFERRED_CASE_MANIFESTS.md\t739fecaba360608ed9a09f897fcd289119718070237cc8356109c5d0449dbfba","GATE1_EXECUTED_STRUCTURAL_CASES.md\t4e19c26fbcc164903bfe61bd733a7e6e2d77e6298a9dd447f49caba62de66100","GATE1_NEUTRAL_PROFILE_MATRIX.md\tcc7ba847cad0310c622a963fa9aabea54d565189963cca8cb3a262e1e0842b8f","GATE1_PAIRED_CASE_RECORD_SKELETONS.md\t511101325163561b45aaabf9e0ab5a997b9450f26efb978f6c963c5f1a356cb2","GATE1_RERUN_PRE_RESULT_MANIFEST_TEMPLATE.md\te36531fce5f06769aa243815a8fb15e6985bca04fab7bf62b8a13ce5eea88982","GATE2_9_EXECUTED_PREPARATION.md\t16165c56316b34ed681aafd86f862e294cbdd79192b4b0c2953150eaf78c1f00","MECHANICAL_STRUCTURAL_CHECK_RESULTS.md\t66d56caae07f224ff8377aca07b527ef6c164acd7d069974b32f8515bdabbf2b","MECHANICAL_STRUCTURAL_CHECK_SPECIFICATION.md\t7bcd140624501798028ea37df7fad207438c0839929aa2d72bdcf98d2f9111aa","NEUTRAL_PAIRED_EVIDENCE_RECORD_SCHEMA.md\t4797eae658877cb326013fe087d0bd766e1d23e824cdf4218f144f5a73bac847","NEXT_SAFE_AUTOMATION_QUEUE.md\t64324ab7bd22cf5e7ab0b18637c084d584ae7f07a40b7ec95e356170d36cf831","PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md\t8945d7fed92c0476c52ffef25917caab810399d9dbfd0f4a7148450018cd499e","PAIRED_CONTENT_ADDRESSABLE_MANIFEST_TEMPLATE.md\t6d7164872e8aafb43bd23b853975e3ac8aed68e53d0a148cd0f4a4a18387c8be","PROVENANCE_AND_REUSE_AUDIT.md\teeea0ea64393b6e77d0f2fa463e00cfd4cdfca5407ae76b2325337ededceea0f","README.md\tf9f2e7014b87fdf7cfdb13fc0e3c85d4b2f9221151228e1a443ff98dd1951571","REPOSITORY_VERIFICATION_RESULTS.md\tdfadd07ad7a46cd65e08fff5f582447b3e3612e57b6542ff105211f650f76d46","RESUME_CODE_HEALTH_RECEIPT.md\t22fde0d23b1a48318f1e4e6bc6d5f142c79c7e24df12ad57545bd4ec2efe5d5b","SAFE_TASK_CLASSIFICATION.md\ta80ab8a3b40e4da5b50f6196042e2aaca4b8f938c872ae6e4080ecf9b29f38ca"]},"predicate_groups":{"group_1_structural":{"pass":true,"output":{"schema_mirror":true,"gate1_case_coverage":true,"vector_mirror":true,"rejection_structure":true,"reorganization_neutrality":true,"gate_2_through_9_coverage":true,"template_boundary":true,"semantic_boundary":"NOT_CHECKED_SEMANTICALLY"}},"group_2_inventory_manifest":{"pass":true,"missing_from_inputs":[],"undeclared_inputs":[],"duplicate_declarations":[],"unhashed_entries":[]},"group_3_paired_manifests":{"pass":true,"template_count":1,"instance_count":0,"instances":[]},"group_4_selection_language":{"pass":true,"reviewed_hits":[{"id":"AUTOPILOT_EXECUTION_BOUNDARY.md:14","text":"No state-model or mechanism selection; no score/rank/weight; no constants,","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"AUTOPILOT_EXECUTION_BOUNDARY.md:35","text":"Fixed process status remains: scoring **NOT STARTED**; ranking **NONE**;","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"AUTOPILOT_EXECUTION_FINAL_DUAL_REVIEW.md:7","text":"**Comparison scoring:** NOT STARTED","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"AUTOPILOT_EXECUTION_FINAL_DUAL_REVIEW.md:8","text":"**State-model ranking:** NONE","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"AUTOPILOT_EXECUTION_FINAL_DUAL_REVIEW.md:10","text":"**Account selected:** NO","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"AUTOPILOT_EXECUTION_FINAL_DUAL_REVIEW.md:11","text":"**UTXO selected:** NO","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"BLOCKED_WORK_REGISTRY.md:18","text":"| Q-01 | Scoring/ranking/selection is decision-relevant protected work | explicit owner authority and all applicable decision prerequisites | preserve unscored evidence gaps |","disposition":"ALLOWLIST_PROHIBITIVE_TASK","pass":true},{"id":"DECISION_QUEUE_UNCHANGED.md:3","text":"No item from `DECISION_QUEUE_DO_NOT_AUTOSELECT.md` was selected, ranked,","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"DECISION_QUEUE_UNCHANGED.md:4","text":"weighted, scored, recommended as adopted, or converted into a default.","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"DECISION_QUEUE_UNCHANGED.md:8","text":"| State model and generalized/Hybrid alternatives | unresolved; no candidate selected |","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"DECISION_QUEUE_UNCHANGED.md:22","text":"Process status: comparison scoring **NOT STARTED**; ranking **NONE**; decision","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"EXECUTION_MANIFEST.md:79","text":"Comparison scoring **NOT STARTED**; ranking **NONE**; decision **NOT MADE**;","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"FIXED_POINT_REPORT.md:35","text":"| Lint prohibited selection language with an explicit allowlist for boundary statements | `COMPLETE_DOCUMENTARY` | current receipt records the reviewed classifications |","disposition":"ALLOWLIST_PROHIBITIVE_TASK","pass":true},{"id":"FIXED_POINT_REPORT.md:42","text":"No score, weighting, recommendation, selection, normative edit, runtime change,","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"FIXED_POINT_REPORT.md:53","text":"Comparison scoring is not started. No state model is ranked, recommended, or","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"FIXED_POINT_REPORT.md:54","text":"selected. No merge is claimed.","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"GATE1_DEFERRED_CASE_MANIFESTS.md:4","text":"relations, proposed effect, outcome vocabulary, unchanged facts, and selected","disposition":"OUT_OF_SCOPE_HOMONYM_NOT_ALLOWLISTED","pass":true},{"id":"GATE1_NEUTRAL_PROFILE_MATRIX.md:4","text":"Each selected combination must receive its own identity and both candidates.","disposition":"OUT_OF_SCOPE_HOMONYM_NOT_ALLOWLISTED","pass":true},{"id":"GATE1_RERUN_PRE_RESULT_MANIFEST_TEMPLATE.md:99","text":"No field selects Account or UTXO or supplies a production default. Scoring is","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"GATE1_RERUN_PRE_RESULT_MANIFEST_TEMPLATE.md:100","text":"**NOT STARTED**; ranking is **NONE**; the state-model decision is **NOT MADE**.","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"NEUTRAL_PAIRED_EVIDENCE_RECORD_SCHEMA.md:23","text":"| `generation_determinism` | deterministic procedure or recorded seed/selection procedure |","disposition":"OUT_OF_SCOPE_HOMONYM_NOT_ALLOWLISTED","pass":true},{"id":"NEUTRAL_PAIRED_EVIDENCE_RECORD_SCHEMA.md:26","text":"| `corpus` | source, version, content identity, selection rule, seed, and exclusions |","disposition":"OUT_OF_SCOPE_HOMONYM_NOT_ALLOWLISTED","pass":true},{"id":"NEXT_SAFE_AUTOMATION_QUEUE.md:27","text":"ranking, adoption, normative edits, runtime changes, production policy, or merge.","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md:28","text":"4. Detect prohibited selection language: scoring, weighting, ranking,","disposition":"ALLOWLIST_PROHIBITIVE_TASK","pass":true},{"id":"PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md:29","text":"   preference, recommendation, adoption, or selection of a candidate. Maintain","disposition":"ALLOWLIST_PROHIBITIVE_TASK","pass":true},{"id":"PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md:36","text":"   into a comparison score.","disposition":"ALLOWLIST_PROHIBITIVE_TASK","pass":true},{"id":"PAIRED_CONTENT_ADDRESSABLE_MANIFEST_TEMPLATE.md:5","text":"\u003e co-equal obligations. This template performs no comparison or selection.","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"README.md:4","text":"\u003e provenance work only. It creates no protocol rule, candidate preference, or","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"README.md:39","text":"- Comparison scoring: **NOT STARTED**","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"README.md:40","text":"- State-model ranking: **NONE**","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"README.md:42","text":"- Account selected: **NO**","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"README.md:43","text":"- UTXO selected: **NO**","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:257","text":"Comparison scoring: NOT STARTED","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:258","text":"State-model ranking: NONE","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:260","text":"Account selected: NO","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:261","text":"UTXO selected: NO","disposition":"ALLOWLIST_NEGATED_BOUNDARY","pass":true},{"id":"SAFE_TASK_CLASSIFICATION.md:17","text":"| S-11 | Count candidate labels and inspect prohibited-selection language | EXECUTOR_REPORTED_OBSERVATION | Earlier label counts and language-check outcomes are unbound lexical observations only | Repeat a bound lexical check; never infer substantive symmetry from counts |","disposition":"ALLOWLIST_PROHIBITIVE_TASK","pass":true},{"id":"SAFE_TASK_CLASSIFICATION.md:37","text":"| Q-01 | Score, rank, or select a state model | BLOCKED_PROTECTED_DECISION | Decision-relevant protected work; this run has no authority to score, rank, weight, recommend, or select | Evidence gaps remain visible without comparison scoring |","disposition":"ALLOWLIST_PROHIBITIVE_TASK","pass":true}]},"group_5_candidate_native_leakage":{"pass":true,"reviewed_hits":[]},"group_6_evidence_verbs":{"pass":true,"reviewed_hits":[{"id":"AUTOPILOT_EXECUTION_BOUNDARY.md:32","text":"Neither means candidate behavior or substantive symmetry was verified. Cargo","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"CROSS_GATE_EXECUTED_CHECKS.md:5","text":"bound package-wide receipt verifies these rows.","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"CROSS_GATE_EXECUTED_CHECKS.md:9","text":"| Shared-case symmetry | 1-9 | STRUCTURAL SHAPE CLAIM WITHDRAWN PENDING REEXECUTION: neutral templates visibly contain co-equal slots; substantive mapping/obligation symmetry is NOT VERIFIED |","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"CROSS_GATE_EXECUTED_CHECKS.md:20","text":"| Reorganization inverse | 1-8 | Template contains four abstract `REORG` vector forms; current structural verification is pending and no implementation behavior was executed |","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"DETERMINISTIC_ABSTRACT_VECTOR_TEMPLATES.md:3","text":"\u003e **TEMPLATES ONLY ??NOT EXECUTED VECTORS OR EVIDENCE.** Determinism here means","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"DETERMINISTIC_ABSTRACT_VECTOR_TEMPLATES.md:70","text":"can confirm only that the neutral fields exist. It cannot establish or choose","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"EXECUTION_MANIFEST.md:15","text":"## Executed command classes","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"EXECUTION_MANIFEST.md:20","text":"it is not a durable receipt and does not establish a current pass. The reported documentary procedure is not a","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"EXECUTION_MANIFEST.md:21","text":"bound executed check: its hashes are stale and its exact command, stdout,","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"FIXED_POINT_REPORT.md:13","text":"classifying `S-15` as executed. This report makes no Gate closure,","disposition":"SUPPORTED_BY_SAME_SECTION_RECEIPT","same_section_receipt":true,"pass":true},{"id":"GATE1_DEFERRED_CASE_MANIFESTS.md:8","text":"Every row is a case-summary stub, not an instantiated manifest and not executed","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"GATE1_EXECUTED_STRUCTURAL_CASES.md:1","text":"# Gate 1 Executed Structural Cases","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"GATE1_EXECUTED_STRUCTURAL_CASES.md:18","text":"| Stage | Frozen fact | Executed structural check | Result |","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"GATE1_EXECUTED_STRUCTURAL_CASES.md:25","text":"| Failure | Rejection has zero canonical effect | Declared obligation only; no executable failure input | NOT EXECUTED |","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"GATE1_EXECUTED_STRUCTURAL_CASES.md:31","text":"run and no cryptographic validity was established.","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"GATE1_PAIRED_CASE_RECORD_SKELETONS.md:89","text":"check. They do not prove that the shared contracts are complete, that","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"MECHANICAL_STRUCTURAL_CHECK_RESULTS.md:3","text":"**Classification:** `STALE_EXECUTOR_REPORTED_OBSERVATION`; not a bound executed","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"MECHANICAL_STRUCTURAL_CHECK_RESULTS.md:33","text":"| Package-wide lint and provenance validation | `CURRENT_PASS_DOCUMENTARY` only under `PACKAGE_WIDE_CHECK_RECEIPT.md`; not established by this stale record |","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":true,"pass":true},{"id":"MECHANICAL_STRUCTURAL_CHECK_SPECIFICATION.md:46","text":"- `PASS_STRUCTURAL`: the exact syntactic predicate passed.","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"MECHANICAL_STRUCTURAL_CHECK_SPECIFICATION.md:50","text":"If durably executed on current inputs, passing all predicates supports only","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"NEUTRAL_PAIRED_EVIDENCE_RECORD_SCHEMA.md:5","text":"\u003e does not establish candidate behavior or Gate credit.","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"NEUTRAL_PAIRED_EVIDENCE_RECORD_SCHEMA.md:119","text":"A mechanical schema check may establish only that both slots exist, their key","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"NEUTRAL_PAIRED_EVIDENCE_RECORD_SCHEMA.md:122","text":"cannot establish that future values are truthful, semantically equivalent, or","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md:37","text":"6. Detect unsupported evidence verbs such as `proves`, `verifies`,","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md:38","text":"   `establishes`, `demonstrates`, `passed`, or `executed`. Each non-negated","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"PAIRED_CONTENT_ADDRESSABLE_MANIFEST_TEMPLATE.md:51","text":"canonicalization rule. Completeness establishes metadata shape only; it does","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"PAIRED_CONTENT_ADDRESSABLE_MANIFEST_TEMPLATE.md:52","text":"not establish truth, candidate behavior, symmetry, or Gate credit.","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"PROVENANCE_AND_REUSE_AUDIT.md:52","text":"executed receipt. This repair does not alter or upgrade candidate evidence,","disposition":"TEMPLATE_REQUIREMENT_OR_HEADING","same_section_receipt":false,"pass":true},{"id":"REPOSITORY_VERIFICATION_RESULTS.md:17","text":"| `cargo test --workspace --locked` | transcript reports exit 0 and 50 unit tests passed | EXECUTOR-REPORTED OBSERVATION; unbound transcript |","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"REPOSITORY_VERIFICATION_RESULTS.md:24","text":"No current Cargo result is established. The preserved transcript is neither a","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:82","text":"test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:88","text":"test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:94","text":"test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:100","text":"test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:105","text":"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:111","text":"test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:161","text":"test result: ok. 45 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:166","text":"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:171","text":"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:176","text":"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:181","text":"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:186","text":"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:191","text":"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s","disposition":"EXECUTOR_REPORTED_OBSERVATION","same_section_receipt":false,"pass":true},{"id":"SAFE_TASK_CLASSIFICATION.md:13","text":"| S-07 | Inspect cross-gate dependency obligations | EXECUTOR_REPORTED_OBSERVATION | Documentary obligations were recorded; no current bound package-wide check verifies them | Re-run structural and status checks with a durable receipt |","disposition":"PENDING","same_section_receipt":true,"pass":true},{"id":"SAFE_TASK_CLASSIFICATION.md:39","text":"No blocked row is treated as executed evidence.","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":true,"pass":true},{"id":"SAFE_TASK_CLASSIFICATION.md:51","text":"the remaining work without claiming it was executed. Substantive candidate","disposition":"NEGATED_OR_RETRACTED","same_section_receipt":true,"pass":true}]},"group_7_provenance":{"pass":true,"classified_observations":[{"id":"FIXED_POINT_REPORT.md:13","classification":"COMPLETE_LINKED_RECEIPT_PROVENANCE","missing_fields":["working directory","input","stdout","stderr","exit status","start","end"],"complete_provenance":true,"pass":true},{"id":"REPOSITORY_VERIFICATION_RESULTS.md:17","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["working directory","input","stdout","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:82","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:88","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:94","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:100","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:105","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:111","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:161","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:166","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:171","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:176","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:181","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:186","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"RESUME_CODE_HEALTH_RECEIPT.md:191","classification":"EXECUTOR_REPORTED_OBSERVATION","missing_fields":["command","working directory","stderr","exit status","start"],"complete_provenance":false,"pass":true},{"id":"SAFE_TASK_CLASSIFICATION.md:13","classification":"PENDING","missing_fields":["working directory","stdout","stderr","exit status","start"],"complete_provenance":false,"pass":true}],"rule":"Claims lacking complete observation provenance remain executor-reported or pending and receive no evidence credit."},"group_8_status_consistency":{"pass":true,"records":[{"file":"README.md","expected_status_consistent":true},{"file":"EXECUTION_MANIFEST.md","expected_status_consistent":true},{"file":"SAFE_TASK_CLASSIFICATION.md","expected_status_consistent":true},{"file":"FIXED_POINT_REPORT.md","expected_status_consistent":true},{"file":"MECHANICAL_STRUCTURAL_CHECK_RESULTS.md","expected_status_consistent":true}]}},"overall_pass":true,"overall_status":"PASS_DOCUMENTARY_ONLY"}
+
 ```
 
 ## Captured stderr
@@ -184,10 +66,17 @@ SUMMARY|failures=0;governed_inputs=25
 
 ## Interpretation and limits
 
-All required documentary predicate groups passed for the exact governed
-inventory. `NOT_CHECKED_SEMANTICALLY` remains mandatory: no template, checker,
-or receipt is converted into state-model evidence. Historical verdicts and
-executor-reported observations retain their original meaning. No safe,
-non-decisional documentary task is presently identified as remaining in this
-old package; future governed-input edits require a new receipt, while protected
-and implementation-dependent work retains its recorded blockers.
+Every governing documentary predicate group passed for the exact 25-input
+inventory. Group 4 records every selection-language hit and its explicit
+reviewed disposition. Group 5 evaluates candidate-exclusive metric vocabulary
+at paragraph scope and found no hit. Groups 6 and 7 record every evidence-verb
+classification and retain incomplete historical observations as
+`EXECUTOR_REPORTED_OBSERVATION` or `PENDING`. Group 8 asserts the intended
+cross-record distinction between the stale historical result and the separate
+current S-15 receipt.
+
+`NOT_CHECKED_SEMANTICALLY` remains mandatory. This receipt supplies no
+candidate behavior, substantive symmetry, Gate credit, protected choice, or
+implementation result. Authorized safe non-decisional documentary work in this
+old package is complete; protected and implementation-dependent work retains
+its recorded blockers.

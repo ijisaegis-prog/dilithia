@@ -12,12 +12,13 @@
   validation.
 - This boundary package has been reconciled to that repaired state.
 
-The retained boundary checker was useful for diagnosing the former layout. It
-is a bounded heuristic and is not the authority for the repaired package's new
-receipt architecture. In particular, it assumes the former schema file is the
-excluded receipt and has hard-coded lexical/status classifications. Running it
-unchanged on the repaired layout therefore produces expected failures and must
-not be described as a verdict on the repaired receipt.
+The boundary checker has now been narrowly updated to execute the old
+package's governing schema. It excludes only the executed receipt, records an
+exact reviewed disposition for every selection/evidence-language hit, checks
+candidate-exclusive metric vocabulary at paragraph scope, validates linked
+provenance classifications, and asserts the intended status distinction across
+the five governing records. Its output is authoritative only for the exact
+receipt-bound documentary inventory and remains non-semantic.
 
 ## Remaining work classes
 

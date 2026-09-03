@@ -7,9 +7,11 @@ historical overclaim. The package contains useful neutral preparation. The
 previously open safe-now package verification is now recorded in
 `PACKAGE_WIDE_CHECK_RECEIPT.md` for its exact bound inventory.
 
-The earlier structural result is stale and lacks durable command/output
-provenance. `S-15` is therefore pending, not executed. This report makes no Gate
-closure, evidence-completion, substantive-symmetry, comparison-readiness, or
+The earlier structural result remains stale and lacks durable command/output
+provenance. It is not the basis for `S-15`. The separate current package-wide
+receipt executes the governing documentary schema and is the sole basis for
+classifying `S-15` as executed. This report makes no Gate closure,
+evidence-completion, substantive-symmetry, comparison-readiness, or
 state-model-decision claim.
 
 ## Safe-now work status
@@ -39,6 +41,12 @@ Protected owner/protocol questions and implementation-dependent work retain
 their blockers in `BLOCKED_WORK_REGISTRY.md` and `SAFE_TASK_CLASSIFICATION.md`.
 No score, weighting, recommendation, selection, normative edit, runtime change,
 or production mechanism is supplied here.
+
+`SAFE_NOW_MEANINGFUL_TASKS_REMAIN: NO`
+
+This terminal statement is limited to authorized non-decisional documentary
+work in this old package. It does not reclassify any protected,
+implementation-dependent, missing-input, or method-prerequisite work.
 
 ## Status safeguards
 

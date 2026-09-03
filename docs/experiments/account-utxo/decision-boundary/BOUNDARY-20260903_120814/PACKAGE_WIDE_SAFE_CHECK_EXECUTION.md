@@ -13,21 +13,21 @@ inventory and excludes only itself. Its pass is documentary only and supplies
 no candidate behavior, substantive symmetry, Gate credit, recommendation, or
 selection.
 
-## Retained boundary checker
+## Governing documentary checker
 
-`PACKAGE_WIDE_SAFE_CHECK.ps1` is retained unchanged as the bounded diagnostic
-used during the earlier defect investigation. It does not fully implement the
-old package's governing schema. Its manifest/receipt model assumes the former
-layout, its lexical classifications are tied to prior line identities, and its
-status check looks for former retraction patterns. Consequently, a post-repair
-run fails groups 2, 4, 6, 7, and 8 even though group 1 still reports structural
-success. Those failures show that this checker is stale for the repaired
-receipt architecture; they are not a competing verdict on the receipt.
+`PACKAGE_WIDE_SAFE_CHECK.ps1` now executes all eight predicate groups required
+by the old package's governing schema. It validates the manifest/inventory and
+paired-manifest state, reruns every structural predicate, uses explicit
+file/line allowlist entries for every selection/evidence-language hit, checks
+candidate-exclusive metric vocabulary at paragraph scope, preserves incomplete
+historical observations as reported or pending, and asserts the exact intended
+status distinction across the five governing records.
 
-The checker also remains narrower than the governing predicates: paired
-manifest validation is incomplete; metric leakage is a same-line heuristic;
-evidence support uses keyword co-occurrence; and status validation tests
-specific patterns rather than general consistency. No broader claim is made.
+The fresh old-package receipt binds the checker identity, complete literal
+host/capture command, working directory, environment/toolchain, governed input
+inventory, decoded stdout, empty stderr, timestamps, and exit status. The
+checker remains documentary and syntactic; its mandatory semantic result is
+`NOT_CHECKED_SEMANTICALLY`.
 
 ## Boundary-package content binding
 
@@ -37,7 +37,7 @@ included. The aggregate is SHA-256 over sorted UTF-8-without-BOM records, each
 encoded as relative name, U+0009, lowercase file SHA-256, and U+000A, including
 the final U+000A.
 
-Aggregate SHA-256: `17c27096616ef52f02a428766e6ec0fabaf9939023efbaf5aee9a1156128e449`
+Aggregate SHA-256: `9818ddecf8462241ba0ed38b5ab64d0d457c92de6260b860f5231aa6a70a39a8`
 
 | Bound artifact | SHA-256 |
 |---|---|
@@ -46,12 +46,12 @@ Aggregate SHA-256: `17c27096616ef52f02a428766e6ec0fabaf9939023efbaf5aee9a1156128
 | `DECISION_PREREQUISITE_MATRIX.md` | `1444eb398fcec037a5354b573e70cc5e5ec857db0c41a43e46a1801fb95cb306` |
 | `EVIDENCE_GAPS_AND_BLOCKERS.md` | `e50dfcc0b467ab92294851c70bae5137e4c239edd6d833a7e8c1a235685e3078` |
 | `FINAL_NONDECISIONAL_STATUS.md` | `8e4e46802bebb0192c51c5d77adcfd168148a594a574a9a77bea41787cac38e8` |
-| `NEXT_SAFE_WORK_EXECUTION.md` | `feb5bd39f703e05b4eb9c6b12650392687621e23375b9a29f5b7027995074f29` |
+| `NEXT_SAFE_WORK_EXECUTION.md` | `059cdb8bd90830b4ceb9ec2e997ef3bec45b43a9378a08163ce28a6b53db3e02` |
 | `OWNER_APPROVAL_BOUNDARY.md` | `9b2a86d25cc8b6ec4321f6e3adbd8e5141ebbc3c2a1f0b3eaccdc0f2c4364c0b` |
 | `PACKAGE_INVENTORY_PROVENANCE_DEFECT_RECORD.md` | `a953c6e956c6ddfe5e029149ef76f51e1cd2bf3afcb291b45c13835b9db9ff63` |
-| `PACKAGE_WIDE_SAFE_CHECK.ps1` | `0121c84c6d9d47aba09fa095ed71557ac297960ca2038c23cbf8bece5a611663` |
+| `PACKAGE_WIDE_SAFE_CHECK.ps1` | `711a1b95f2a3cd2373f642375f8833c5626cd50710810b70dcc484922f733bfa` |
 | `PROTECTED_DECISION_QUEUE.md` | `a410cbb7475ebe48c7cbf93de603035f075a3afd197943d861fb1a7f7b33e99f` |
-| `README.md` | `60bfb20754ce3be435816b0a826825654ead3b52f3d7af3abfc4a2cec7548011` |
+| `README.md` | `a54e225e5c47d8a241bda36bdc2c38f77de7423dc0e1936834dd292c49209356` |
 
 This is the package's stable internal content binding. It does not identify a
 Git commit. Exact Git identity is supplied externally by the outer runner and
