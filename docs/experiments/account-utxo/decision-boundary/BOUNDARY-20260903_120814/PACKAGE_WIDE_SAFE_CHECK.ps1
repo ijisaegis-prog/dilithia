@@ -89,7 +89,12 @@ $sf=@('README.md','EXECUTION_MANIFEST.md','SAFE_TASK_CLASSIFICATION.md','FIXED_P
 $statusTests=[ordered]@{
  'README.md'={param($t) $t-match'current documentary package check is\s+bound by `PACKAGE_WIDE_CHECK_RECEIPT\.md`'-and$t-match'Comparison scoring: \*\*NOT STARTED\*\*'-and$t-match'State-model decision: \*\*NOT MADE\*\*'}
  'EXECUTION_MANIFEST.md'={param($t) $t-match'current execution receipt'-and$t-match'Comparison scoring \*\*NOT STARTED\*\*; ranking \*\*NONE\*\*; decision \*\*NOT MADE\*\*'}
- 'SAFE_TASK_CLASSIFICATION.md'={param($t) $t-match'(?m)^\| S-15 \|.*\| EXECUTED_SAFE_NOW \|.*PACKAGE_WIDE_CHECK_RECEIPT\.md'}
+ 'SAFE_TASK_CLASSIFICATION.md'={param($t)
+   $t-match'(?m)^\| S-07 \|.*\| EXECUTED_SAFE_NOW \|.*PACKAGE_WIDE_CHECK_RECEIPT\.md' -and
+   $t-match'(?m)^\| S-11 \|.*\| EXECUTED_SAFE_NOW \|.*PACKAGE_WIDE_CHECK_RECEIPT\.md' -and
+   $t-match'(?m)^\| S-15 \|.*\| EXECUTED_SAFE_NOW \|.*PACKAGE_WIDE_CHECK_RECEIPT\.md' -and
+   $t-match'(?m)^\| S-18 \|.*\| EXECUTED_SAFE_NOW \|.*PACKAGE_WIDE_CHECK_RECEIPT\.md'
+ }
  'FIXED_POINT_REPORT.md'={param($t) $t-match'earlier documentary fixed-point assertion remains \*\*RETRACTED\*\*'-and$t-match'`S-15` is `EXECUTED_SAFE_NOW` only as documentary validation'-and$t-match'`SAFE_NOW_MEANINGFUL_TASKS_REMAIN: NO`'}
  'MECHANICAL_STRUCTURAL_CHECK_RESULTS.md'={param($t) $t-match'STALE_EXECUTOR_REPORTED_OBSERVATION'-and$t-match'\| `S-15` \| `EXECUTED_SAFE_NOW` only under the separate current package-wide receipt'}
 }
