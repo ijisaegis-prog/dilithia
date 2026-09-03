@@ -7,10 +7,12 @@ this directory; retain, correct, and execute the exact permitted
 `PACKAGE_WIDE_SAFE_CHECK.ps1`; execute non-mutating structural, inventory,
 language, provenance, and source-presence checks; classify blockers; and expose
 decision questions. No other non-Markdown artifact and no Git operation was
-authorized within the audit action itself. Commit
-`d7af9f06464983695bae6e7b18749dc445fa17b1` identifies the reviewed baseline.
-These corrections postdate that commit; their Git binding remains pending an
-authorized later commit and is not claimed here.
+authorized within the audit action itself. No Git operation is performed by
+this correction. The review establishes that commit
+`dccc3afc956bcd07122eba106be503baca122a17` contains the corrected boundary
+package, is the clean branch tip matching
+`origin/automation/decision-boundary-20260903_120814`, and directly descends
+from prior reviewed baseline `d7af9f06464983695bae6e7b18749dc445fa17b1`.
 
 ## What this run completed without approval
 

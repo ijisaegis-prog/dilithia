@@ -63,9 +63,10 @@ also inspected the Rust source for a candidate state-model realization.
    the overall check as failing. No package-wide schema pass is claimed.
 8. Corrected the authorization and checker-retention accounts and created the
    receipt-excluded content binding recorded in
-   `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. The reviewed baseline is commit
-   `d7af9f06464983695bae6e7b18749dc445fa17b1`; these corrections postdate it
-   and require an authorized later commit for Git binding.
+   `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. Reviewed commit
+   `dccc3afc956bcd07122eba106be503baca122a17` Git-binds the corrected boundary
+   package and directly descends from prior reviewed baseline
+   `d7af9f06464983695bae6e7b18749dc445fa17b1`.
 
 The checker identity, invocation, environment, timestamps, stream hashes,
 inventory digest, set mismatch, and explicit lexical dispositions are recorded
@@ -97,9 +98,9 @@ The current stopping boundary, without claiming a fixed point, is:
 > content binding,
 > the governed inventory and digest are recorded, the two-sided set mismatch is
 > stated, every current lexical match is classified, and the substantive
-> boundary package's reviewed baseline has Git identity
-> `d7af9f06464983695bae6e7b18749dc445fa17b1`, while Git binding of these
-> corrections remains pending because Git operations are not authorized. The old
+> boundary package is Git-bound by reviewed commit
+> `dccc3afc956bcd07122eba106be503baca122a17`, which directly descends from
+> `d7af9f06464983695bae6e7b18749dc445fa17b1`. The old
 > source package was not repaired in this run, and
 > no further material Account-vs-UTXO evidence can be produced from the current
 > frozen inputs without crossing a protected decision, implementation, method,

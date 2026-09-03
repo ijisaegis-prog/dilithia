@@ -9,10 +9,10 @@ eight labelled groups and is locally present and executable, but those groups
 are bounded documentary checks rather than a complete implementation of every
 governing predicate. The inspected package
 still fails group 2, so no package-wide pass or durable old-package receipt is
-claimed. This boundary run records a receipt-excluded content binding below;
-commit `d7af9f06464983695bae6e7b18749dc445fa17b1` identifies the reviewed
-baseline. These corrections postdate it and are not Git-bound until an
-authorized later commit is created.
+claimed. This boundary run records a receipt-excluded content binding below.
+Reviewed commit `dccc3afc956bcd07122eba106be503baca122a17` Git-binds the
+corrected boundary package and directly descends from prior reviewed baseline
+`d7af9f06464983695bae6e7b18749dc445fa17b1`.
 
 ## Corrected execution identity
 
@@ -32,8 +32,9 @@ authorized later commit is created.
 | stderr SHA-256 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 
 The stdout hash identifies the recorded PowerShell `Out-String` capture,
-including its final platform newline. The separate reviewed-baseline Git
-identity is identified above; it does not bind these corrected working bytes.
+including its final platform newline. The corrected boundary package's reviewed
+Git identity is identified above. It is separate from the old execution
+package's failed receipt predicate.
 
 ## Correction-verification rerun
 
@@ -177,25 +178,25 @@ self-hash. No other artifact is excluded. The aggregate is SHA-256 over sorted
 UTF-8-without-BOM records encoded as relative name, U+0009, lowercase file
 SHA-256, and U+000A, including the final U+000A.
 
-Aggregate SHA-256: `f3679cbbfc9e79904823eedd3a8325c83f9b10a80ff8139fd2022cde57c4f07d`
+Aggregate SHA-256: `1e2f6293112119600f66a506aeaf693adde72dabf8ef47451bf67617be27b825`
 
 | Bound artifact | SHA-256 |
 |---|---|
-| `CURRENT_FIXED_POINT_AUDIT.md` | `8802f7d4b95578c851878010096e50eea5c5a36de074dcddc0f792fd65c2e520` |
+| `CURRENT_FIXED_POINT_AUDIT.md` | `3b2d1d5e95b6ee7af95a702e1ca3ebd0365fd5308a7922254a7c07d70f89c067` |
 | `DECISION_DEPENDENCY_ORDER.md` | `03d715fbf101fb25186d3231a5bfb8a8b44a5fcc73bf2784b5d2f14a58380182` |
 | `DECISION_PREREQUISITE_MATRIX.md` | `1444eb398fcec037a5354b573e70cc5e5ec857db0c41a43e46a1801fb95cb306` |
 | `EVIDENCE_GAPS_AND_BLOCKERS.md` | `ac82bc95895f59eed51e9ddf113aafdece7af260934f10455cf11035991c9e52` |
-| `FINAL_NONDECISIONAL_STATUS.md` | `b6660fa0824552dee7cfd8315dc2278ad475eee39ae19b501ee6b4dc8d3e11a1` |
-| `NEXT_SAFE_WORK_EXECUTION.md` | `f0b18c06ed2a7c0e5a4b38223487f2dfabc03fa2ba15590b24dae410274ea717` |
-| `OWNER_APPROVAL_BOUNDARY.md` | `217973b0d76134af0a88fe99f38c74d9f32395317068b2b790cba837cbf3046a` |
+| `FINAL_NONDECISIONAL_STATUS.md` | `9fea6630cb002aa5073c13811e58cd36f4a0c82539e10349043aede7720a9514` |
+| `NEXT_SAFE_WORK_EXECUTION.md` | `1105e5150ec5f86205d04529f286027337c2700eb5830e692c9819723b645bc6` |
+| `OWNER_APPROVAL_BOUNDARY.md` | `968fcec4e775efc616d050d66bfb3f61baa7e883ed746356a19771555dae2b75` |
 | `PACKAGE_INVENTORY_PROVENANCE_DEFECT_RECORD.md` | `99d1f1e41f715474733a310b4f43e5e8f954e6e3270ec204e2658803a17f2ad1` |
 | `PACKAGE_WIDE_SAFE_CHECK.ps1` | `0121c84c6d9d47aba09fa095ed71557ac297960ca2038c23cbf8bece5a611663` |
 | `PROTECTED_DECISION_QUEUE.md` | `a410cbb7475ebe48c7cbf93de603035f075a3afd197943d861fb1a7f7b33e99f` |
-| `README.md` | `ff270cb23f3c14b02777aa17636a3c0b23d2d87fe555da3ac96ac2aa817a2118` |
+| `README.md` | `4bff109d798e91691aa16857101e1ad1058433ca6daec10a768999d24c63ea09` |
 
 This content binding detects changes to every non-receipt boundary artifact.
-Commit `d7af9f06464983695bae6e7b18749dc445fa17b1` identifies the reviewed
-baseline but not these corrected bytes. Git binding of the corrected package
-requires an authorized later commit. Neither the content binding nor a future
-Git binding repairs or supplies a passing receipt for the inspected old
-package.
+Reviewed commit `dccc3afc956bcd07122eba106be503baca122a17` Git-binds the
+corrected boundary package and directly descends from prior baseline
+`d7af9f06464983695bae6e7b18749dc445fa17b1`. Neither that Git binding nor this
+content binding repairs or supplies a passing receipt for the inspected old
+execution package.

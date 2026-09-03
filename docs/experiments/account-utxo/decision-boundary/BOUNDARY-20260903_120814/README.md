@@ -2,8 +2,9 @@
 
 **Run:** `BOUNDARY-20260903_120814`
 **Source supplied by owner:** branch `analysis/account-utxo-state-model-comparison`, commit `fe094d20d9e6f13903a2033c74a289ab18605d40`
-**Reviewed baseline Git identity:** `d7af9f06464983695bae6e7b18749dc445fa17b1`
-**Corrected working-byte Git binding:** pending; Git operations are outside this correction's authorization
+**Prior reviewed baseline Git identity:** `d7af9f06464983695bae6e7b18749dc445fa17b1`
+**Reviewed corrected-package Git identity:** `dccc3afc956bcd07122eba106be503baca122a17`
+**Branch binding:** clean branch tip matching `origin/automation/decision-boundary-20260903_120814`, as established by the review
 **Classification:** non-normative audit and documentary execution record
 **Protocol adoption effect:** none
 
@@ -29,9 +30,10 @@ its own schema. This run cannot repair the old manifest because the mission
 forbids modifying existing tracked files.
 
 The receipt-excluded content-addressed binding covers the corrected current
-non-receipt artifacts. Commit `d7af9f06464983695bae6e7b18749dc445fa17b1`
-identifies the reviewed baseline, not these subsequent corrections. Binding
-the corrected bytes to Git requires an authorized later commit. Further
+non-receipt artifacts. Reviewed commit
+`dccc3afc956bcd07122eba106be503baca122a17` contains the corrected package and
+directly descends from prior baseline
+`d7af9f06464983695bae6e7b18749dc445fa17b1`. Further
 material state-model comparison progress requires protected inputs,
 candidate-symmetric implementations, or missing evidence after applicable
 method prerequisites are frozen.

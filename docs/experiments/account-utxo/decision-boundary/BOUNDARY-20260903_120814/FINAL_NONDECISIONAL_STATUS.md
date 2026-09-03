@@ -9,9 +9,10 @@
 The first value means all documentary and technical work permitted in this run
 has been executed, including a receipt-excluded content-addressed binding of
 the corrected non-receipt artifacts and all bounded checker groups. This does
-not assert complete implementation of the governing schema. Commit
-`d7af9f06464983695bae6e7b18749dc445fa17b1` identifies the reviewed baseline;
-Git binding of these later corrections requires an authorized commit. The
+not assert complete implementation of the governing schema. Reviewed commit
+`dccc3afc956bcd07122eba106be503baca122a17` Git-binds the corrected boundary
+package and directly descends from prior reviewed baseline
+`d7af9f06464983695bae6e7b18749dc445fa17b1`. The
 second value is limited to
 material comparison progress from the current frozen inputs.
 
@@ -44,9 +45,9 @@ edit, or merge is created by this package.
 - Selection-language and evidence-verb scans: current matches explicitly
   disposed in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`; earlier unexplained
   counts are superseded. Other earlier checks retain only their bounded scope.
-- Corrected non-receipt content binding: **EXECUTED**; corrected working-byte
-  Git binding: **PENDING AUTHORIZED COMMIT**. The reviewed baseline Git identity
-  is the commit identified above.
+- Corrected non-receipt content binding: **EXECUTED**; corrected boundary-package
+  Git binding: **COMPLETE AT REVIEWED COMMIT**
+  `dccc3afc956bcd07122eba106be503baca122a17`.
 - Substantive candidate symmetry: **NOT VERIFIED**.
 - Gate 1 direct evidence credit from the structural package: remains limited by
   its own provenance/re-execution declarations.

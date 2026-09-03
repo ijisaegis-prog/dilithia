@@ -13,7 +13,7 @@
 | DB-EX-07 | Validate paired-manifest completeness applicability | passed with zero instances: the sole named content-addressable manifest is expressly a template | unresolved template fields are not evidence and are not fabricated |
 | DB-EX-08 | Validate package status consistency | passed: named status records consistently retract the former current-pass/fixed-point claim and retain `S-15` as pending inside the inspected package | does not upgrade old package status |
 | DB-EX-09 | Retain and run the allowed checker; record explicit lexical dispositions | eight bounded checker groups executed; the tool reports groups 1 and 3 through 8 pass and group 2/overall fail, but groups 3, 5, 6, and 8 are narrower than the governing predicates | no package-wide schema pass or durable old-package receipt claimed |
-| DB-EX-10 | Refresh the permitted content binding | sorted SHA-256 identities for every non-receipt Markdown artifact and the exact checker, plus aggregate digest, are recorded in the execution receipt; `d7af9f06464983695bae6e7b18749dc445fa17b1` identifies the reviewed baseline, not the corrected working bytes | Git binding of corrections requires an authorized later commit |
+| DB-EX-10 | Refresh the permitted content binding | sorted SHA-256 identities for every non-receipt Markdown artifact and the exact checker, plus aggregate digest, are recorded in the execution receipt; reviewed commit `dccc3afc956bcd07122eba106be503baca122a17` Git-binds the corrected boundary package and directly descends from `d7af9f06464983695bae6e7b18749dc445fa17b1` | does not repair the old execution-package receipt |
 | DB-EX-11 | Reconcile authorization, checker retention, and provenance status | authorization now states the PowerShell exception; checker is locally present and executable; required audit status lines occur exactly once | changes no inspected-package bytes or protocol meaning |
 
 ### Current template-input identities
@@ -85,10 +85,11 @@ mechanically checkable oracles—not mere absence of another template.
 - A durable old-package receipt needs an exact complete inventory, executable
   checker identity, captured streams/status/timestamps, and durable binding.
 
-The corrected non-receipt content binding is complete. Git binding of these
-post-`d7af9f06464983695bae6e7b18749dc445fa17b1` corrections remains unresolved;
-its prerequisite is authorization to create a later commit. It does not cure
-the old package's inventory defect.
+The corrected non-receipt content binding is complete. Reviewed commit
+`dccc3afc956bcd07122eba106be503baca122a17` Git-binds this corrected boundary
+package and directly descends from
+`d7af9f06464983695bae6e7b18749dc445fa17b1`. That completed branch-local
+binding does not cure the old execution package's inventory defect.
 
 ## NO_LONGER_NEEDED
 
