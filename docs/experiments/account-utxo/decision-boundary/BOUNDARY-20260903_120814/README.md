@@ -2,7 +2,8 @@
 
 **Run:** `BOUNDARY-20260903_120814`
 **Source supplied by owner:** branch `analysis/account-utxo-state-model-comparison`, commit `fe094d20d9e6f13903a2033c74a289ab18605d40`
-**Boundary-package Git binding:** branch `automation/decision-boundary-20260903_120814`, commit `f19170a7d7d3c1b6f0931bc7b8f6c9b31688b902` (committed and pushed)
+**Reviewed baseline Git identity:** `d7af9f06464983695bae6e7b18749dc445fa17b1`
+**Corrected working-byte Git binding:** pending; Git operations are outside this correction's authorization
 **Classification:** non-normative audit and documentary execution record
 **Protocol adoption effect:** none
 
@@ -11,10 +12,11 @@
 The prior fixed-point claim was correctly retracted by its own final integrated
 package. This audit records bounded structural and documentary observations; it
 does not claim a complete durable execution of every package-wide predicate.
-Corrective safe work implemented and executed all eight schema groups,
-recorded the corrected governed inventory digest, and applied the schema's
-reviewed language and observation-level provenance classifications. Groups 1
-and 3 through 8 pass. The overall result remains `FAIL` because group 2's
+Corrective safe work ran eight checker-labelled groups, recorded the governed
+inventory digest, and applied bounded lexical and documentary heuristics. The
+checker is not a complete implementation of all governing predicates: groups
+3, 5, 6, and 8 have the limitations stated in the execution record. Its
+overall result remains `FAIL` because group 2's
 inventory check fails set equality: after the required
 receipt exclusion, the 24 governed inputs and 24 declarations differ because
 the receipt is wrongly declared while
@@ -26,9 +28,11 @@ not have the complete, current, content-bound package-wide receipt required by
 its own schema. This run cannot repair the old manifest because the mission
 forbids modifying existing tracked files.
 
-The content-addressed binding is complete, and the substantive boundary
-package was committed and pushed at the branch-local Git binding identified
-above. Further material state-model comparison progress requires protected inputs,
+The receipt-excluded content-addressed binding covers the corrected current
+non-receipt artifacts. Commit `d7af9f06464983695bae6e7b18749dc445fa17b1`
+identifies the reviewed baseline, not these subsequent corrections. Binding
+the corrected bytes to Git requires an authorized later commit. Further
+material state-model comparison progress requires protected inputs,
 candidate-symmetric implementations, or missing evidence after applicable
 method prerequisites are frozen.
 

@@ -4,15 +4,15 @@
 
 `INVENTORY_MANIFEST_RESULT: FAIL_SET_MISMATCH`
 
-This record corrects the earlier execution account. The retained checker now
-implements all eight predicate groups in the governing schema, including
-explicit reviewed language dispositions and observation-level provenance
-classification. It is locally present and executable. The inspected package
+This record corrects the earlier execution account. The retained checker emits
+eight labelled groups and is locally present and executable, but those groups
+are bounded documentary checks rather than a complete implementation of every
+governing predicate. The inspected package
 still fails group 2, so no package-wide pass or durable old-package receipt is
 claimed. This boundary run records a receipt-excluded content binding below;
-the substantive boundary package was subsequently committed and pushed on
-`automation/decision-boundary-20260903_120814` at
-`f19170a7d7d3c1b6f0931bc7b8f6c9b31688b902`.
+commit `d7af9f06464983695bae6e7b18749dc445fa17b1` identifies the reviewed
+baseline. These corrections postdate it and are not Git-bound until an
+authorized later commit is created.
 
 ## Corrected execution identity
 
@@ -32,8 +32,8 @@ the substantive boundary package was subsequently committed and pushed on
 | stderr SHA-256 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 
 The stdout hash identifies the recorded PowerShell `Out-String` capture,
-including its final platform newline. The separate branch-local Git binding is
-identified above.
+including its final platform newline. The separate reviewed-baseline Git
+identity is identified above; it does not bind these corrected working bytes.
 
 ## Correction-verification rerun
 
@@ -150,7 +150,7 @@ Classification is per lexical observation, not document-wide.
 | corrected inventory SHA-256 | `bd9bf9a1d4ecd869c34ac38ca07adc2805154c2fe42df1848b099b37984c8ae1` |
 | overall | `FAIL` |
 
-Predicate-group results: group 1 structural `PASS` with
+Bounded checker results: group 1 structural `PASS` with
 `NOT_CHECKED_SEMANTICALLY`; group 2 inventory/manifest `FAIL`, with
 `missing_from_inputs` equal to
 `PACKAGE_WIDE_CHECK_AND_RECEIPT_SCHEMA.md`, `undeclared_inputs` equal to
@@ -160,8 +160,14 @@ prohibited-language review `PASS` (39 classified hits); group 5
 candidate-native leakage `PASS` (zero syntactic one-candidate hits); group 6
 evidence-claim review `PASS` (45 classified hits); group 7 observation-level
 provenance classification `PASS`; and group 8 status consistency `PASS`.
-Overall status is `FAIL` because group 2 fails. These are documentary results
-only and supply no candidate or Gate evidence.
+Overall status is `FAIL` because group 2 fails. These are tool-local documentary
+results only and supply no candidate or Gate evidence. They are not a complete
+schema verdict: group 3 does not exhaustively validate required fields or
+result/status consistency; group 5 detects only same-line metric terms with
+exactly one candidate name and does not validate paired scope, provenance, or
+score normalization; group 6 accepts same-section keyword co-occurrence rather
+than verifying an actual receipt and predicate/output citation; and group 8
+checks retraction-pattern presence rather than general status consistency.
 
 ## Boundary-package content binding
 
@@ -171,23 +177,25 @@ self-hash. No other artifact is excluded. The aggregate is SHA-256 over sorted
 UTF-8-without-BOM records encoded as relative name, U+0009, lowercase file
 SHA-256, and U+000A, including the final U+000A.
 
-Aggregate SHA-256: `b5bf8c1065fad00ead1e01650362f9d0854ea89661380e3d84313fa4b849a678`
+Aggregate SHA-256: `f3679cbbfc9e79904823eedd3a8325c83f9b10a80ff8139fd2022cde57c4f07d`
 
 | Bound artifact | SHA-256 |
 |---|---|
-| `CURRENT_FIXED_POINT_AUDIT.md` | `fac97bd4eb8535426297aa20f0f8323598ad3ecd3400b02b9b4730d7d9d47407` |
+| `CURRENT_FIXED_POINT_AUDIT.md` | `8802f7d4b95578c851878010096e50eea5c5a36de074dcddc0f792fd65c2e520` |
 | `DECISION_DEPENDENCY_ORDER.md` | `03d715fbf101fb25186d3231a5bfb8a8b44a5fcc73bf2784b5d2f14a58380182` |
 | `DECISION_PREREQUISITE_MATRIX.md` | `1444eb398fcec037a5354b573e70cc5e5ec857db0c41a43e46a1801fb95cb306` |
 | `EVIDENCE_GAPS_AND_BLOCKERS.md` | `ac82bc95895f59eed51e9ddf113aafdece7af260934f10455cf11035991c9e52` |
-| `FINAL_NONDECISIONAL_STATUS.md` | `e61123364641e0302f0cfc11bc4218f3ffd28e8c276af554a0b9027a6e9f9636` |
-| `NEXT_SAFE_WORK_EXECUTION.md` | `ed469ed45011713b493cea194e3413e18b46ea789e7a0e9830f9afcb4e20c6bd` |
-| `OWNER_APPROVAL_BOUNDARY.md` | `e23347c022306149201d13b7a72961443d83ab73a753ab5615ba8e49613c2c5c` |
+| `FINAL_NONDECISIONAL_STATUS.md` | `b6660fa0824552dee7cfd8315dc2278ad475eee39ae19b501ee6b4dc8d3e11a1` |
+| `NEXT_SAFE_WORK_EXECUTION.md` | `f0b18c06ed2a7c0e5a4b38223487f2dfabc03fa2ba15590b24dae410274ea717` |
+| `OWNER_APPROVAL_BOUNDARY.md` | `217973b0d76134af0a88fe99f38c74d9f32395317068b2b790cba837cbf3046a` |
 | `PACKAGE_INVENTORY_PROVENANCE_DEFECT_RECORD.md` | `99d1f1e41f715474733a310b4f43e5e8f954e6e3270ec204e2658803a17f2ad1` |
 | `PACKAGE_WIDE_SAFE_CHECK.ps1` | `0121c84c6d9d47aba09fa095ed71557ac297960ca2038c23cbf8bece5a611663` |
 | `PROTECTED_DECISION_QUEUE.md` | `a410cbb7475ebe48c7cbf93de603035f075a3afd197943d861fb1a7f7b33e99f` |
-| `README.md` | `eca7208c2b88679bbb85f2facb0b57b032d416fdc29ee9f7014b830bb1df76d3` |
+| `README.md` | `ff270cb23f3c14b02777aa17636a3c0b23d2d87fe555da3ac96ac2aa817a2118` |
 
 This content binding detects changes to every non-receipt boundary artifact.
-The substantive boundary package, including this receipt, was retained by the
-branch-local commit identified above. That retention does not repair or bind a
-passing receipt for the inspected old package.
+Commit `d7af9f06464983695bae6e7b18749dc445fa17b1` identifies the reviewed
+baseline but not these corrected bytes. Git binding of the corrected package
+requires an authorized later commit. Neither the content binding nor a future
+Git binding repairs or supplies a passing receipt for the inspected old
+package.

@@ -51,18 +51,21 @@ also inspected the Rust source for a candidate state-model realization.
 6. Inspected the Rust crates for Account/UTXO/state-model realizations. No
    candidate implementation or harness match was found. This is a current
    source-tree search result, not proof that no implementation exists elsewhere.
-7. Corrected the expressly permitted PowerShell checker to execute all eight
-   governing predicate groups, including the schema's explicit reviewed
-   selection-language exceptions and observation-level evidence/provenance
-   classifications, and re-ran it. Groups 1 and 3 through 8 pass; group 2 and
-   therefore the overall check fail on the old package's manifest set mismatch.
-   No package-wide pass is claimed.
+7. Corrected and re-ran the expressly permitted PowerShell checker. It emits
+   eight labelled result groups, but it does not exhaustively implement all
+   governing predicates. Group 3 does not exhaustively validate required
+   manifest fields or result/status consistency; group 5 is a same-line lexical
+   screen and does not validate paired scope, provenance, or score
+   normalization; group 6 uses same-section keyword co-occurrence rather than
+   proving an actual receipt plus predicate/output citation; and group 8 checks
+   required retraction patterns rather than general status consistency. The
+   bounded checker reports groups 1 and 3 through 8 as passing and group 2 and
+   the overall check as failing. No package-wide schema pass is claimed.
 8. Corrected the authorization and checker-retention accounts and created the
-   complete in-scope content binding recorded in
-   `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. The substantive boundary package was
-   then committed and pushed on
-   `automation/decision-boundary-20260903_120814` at
-   `f19170a7d7d3c1b6f0931bc7b8f6c9b31688b902`.
+   receipt-excluded content binding recorded in
+   `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. The reviewed baseline is commit
+   `d7af9f06464983695bae6e7b18749dc445fa17b1`; these corrections postdate it
+   and require an authorized later commit for Git binding.
 
 The checker identity, invocation, environment, timestamps, stream hashes,
 inventory digest, set mismatch, and explicit lexical dispositions are recorded
@@ -90,10 +93,13 @@ predicate or that the inventory mismatch is the sole possible failure.
 The current stopping boundary, without claiming a fixed point, is:
 
 > All work permitted by this run has been executed: the checker is locally
-> present and executable, the boundary package has an explicit content binding,
+> present and executable, the corrected non-receipt artifacts have an explicit
+> content binding,
 > the governed inventory and digest are recorded, the two-sided set mismatch is
 > stated, every current lexical match is classified, and the substantive
-> boundary package is committed and pushed on its automation branch. The old
+> boundary package's reviewed baseline has Git identity
+> `d7af9f06464983695bae6e7b18749dc445fa17b1`, while Git binding of these
+> corrections remains pending because Git operations are not authorized. The old
 > source package was not repaired in this run, and
 > no further material Account-vs-UTXO evidence can be produced from the current
 > frozen inputs without crossing a protected decision, implementation, method,

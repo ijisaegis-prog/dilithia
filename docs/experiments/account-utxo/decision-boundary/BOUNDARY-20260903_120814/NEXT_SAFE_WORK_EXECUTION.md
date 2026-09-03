@@ -12,8 +12,8 @@
 | DB-EX-06 | Validate instantiated Markdown links | passed: no unresolved local target | link resolution is documentary integrity only |
 | DB-EX-07 | Validate paired-manifest completeness applicability | passed with zero instances: the sole named content-addressable manifest is expressly a template | unresolved template fields are not evidence and are not fabricated |
 | DB-EX-08 | Validate package status consistency | passed: named status records consistently retract the former current-pass/fixed-point claim and retain `S-15` as pending inside the inspected package | does not upgrade old package status |
-| DB-EX-09 | Retain, correct, and run the allowed checker; record explicit lexical dispositions | all eight schema groups implemented; groups 1 and 3 through 8 pass, while group 2 and overall status fail on the old package's set mismatch | no durable old-package receipt claimed |
-| DB-EX-10 | Complete the boundary-package binding | sorted SHA-256 identities for every bound Markdown artifact and the exact checker, plus aggregate digest, are recorded in the execution receipt; the substantive package was committed and pushed on `automation/decision-boundary-20260903_120814` at `f19170a7d7d3c1b6f0931bc7b8f6c9b31688b902` | content addressing and Git retention create no protocol choice |
+| DB-EX-09 | Retain and run the allowed checker; record explicit lexical dispositions | eight bounded checker groups executed; the tool reports groups 1 and 3 through 8 pass and group 2/overall fail, but groups 3, 5, 6, and 8 are narrower than the governing predicates | no package-wide schema pass or durable old-package receipt claimed |
+| DB-EX-10 | Refresh the permitted content binding | sorted SHA-256 identities for every non-receipt Markdown artifact and the exact checker, plus aggregate digest, are recorded in the execution receipt; `d7af9f06464983695bae6e7b18749dc445fa17b1` identifies the reviewed baseline, not the corrected working bytes | Git binding of corrections requires an authorized later commit |
 | DB-EX-11 | Reconcile authorization, checker retention, and provenance status | authorization now states the PowerShell exception; checker is locally present and executable; required audit status lines occur exactly once | changes no inspected-package bytes or protocol meaning |
 
 ### Current template-input identities
@@ -85,8 +85,10 @@ mechanically checkable oracles—not mere absence of another template.
 - A durable old-package receipt needs an exact complete inventory, executable
   checker identity, captured streams/status/timestamps, and durable binding.
 
-Branch-local Git binding of this boundary package is complete. It is not a
-remaining safe-now task and does not cure the old package's inventory defect.
+The corrected non-receipt content binding is complete. Git binding of these
+post-`d7af9f06464983695bae6e7b18749dc445fa17b1` corrections remains unresolved;
+its prerequisite is authorization to create a later commit. It does not cure
+the old package's inventory defect.
 
 ## NO_LONGER_NEEDED
 

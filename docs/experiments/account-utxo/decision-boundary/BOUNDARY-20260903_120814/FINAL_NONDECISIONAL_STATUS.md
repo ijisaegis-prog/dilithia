@@ -7,11 +7,12 @@
 `OWNER_OR_PROTOCOL_DECISION_NOW_REQUIRED_FOR_FURTHER_MATERIAL_PROGRESS: YES`
 
 The first value means all documentary and technical work permitted in this run
-has been executed, including a complete content-addressed boundary-package
-binding and all eight checker groups. Branch-local Git binding is also complete:
-the substantive package was committed and pushed on
-`automation/decision-boundary-20260903_120814` at
-`f19170a7d7d3c1b6f0931bc7b8f6c9b31688b902`. The second value is limited to
+has been executed, including a receipt-excluded content-addressed binding of
+the corrected non-receipt artifacts and all bounded checker groups. This does
+not assert complete implementation of the governing schema. Commit
+`d7af9f06464983695bae6e7b18749dc445fa17b1` identifies the reviewed baseline;
+Git binding of these later corrections requires an authorized commit. The
+second value is limited to
 material comparison progress from the current frozen inputs.
 
 ## Process status
@@ -43,8 +44,9 @@ edit, or merge is created by this package.
 - Selection-language and evidence-verb scans: current matches explicitly
   disposed in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`; earlier unexplained
   counts are superseded. Other earlier checks retain only their bounded scope.
-- Boundary-package content binding: **EXECUTED**; branch-local Git binding:
-  **COMMITTED AND PUSHED** at the commit identified above.
+- Corrected non-receipt content binding: **EXECUTED**; corrected working-byte
+  Git binding: **PENDING AUTHORIZED COMMIT**. The reviewed baseline Git identity
+  is the commit identified above.
 - Substantive candidate symmetry: **NOT VERIFIED**.
 - Gate 1 direct evidence credit from the structural package: remains limited by
   its own provenance/re-execution declarations.
