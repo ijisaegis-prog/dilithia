@@ -13,7 +13,7 @@
 | DB-EX-07 | Validate paired-manifest completeness applicability | passed with zero instances: the sole named content-addressable manifest is expressly a template | unresolved template fields are not evidence and are not fabricated |
 | DB-EX-08 | Validate package status consistency | passed: named status records consistently retract the former current-pass/fixed-point claim and retain `S-15` as pending inside the inspected package | does not upgrade old package status |
 | DB-EX-09 | Retain, correct, and run the allowed checker; record explicit lexical dispositions | all eight schema groups implemented; groups 1 and 3 through 8 pass, while group 2 and overall status fail on the old package's set mismatch | no durable old-package receipt claimed |
-| DB-EX-10 | Complete the permitted boundary-package binding | sorted SHA-256 identities for every bound Markdown artifact and the exact checker, plus aggregate digest, are recorded in the execution receipt | content addressing creates no protocol choice; external retention is separate |
+| DB-EX-10 | Complete the boundary-package binding | sorted SHA-256 identities for every bound Markdown artifact and the exact checker, plus aggregate digest, are recorded in the execution receipt; the substantive package was committed and pushed on `automation/decision-boundary-20260903_120814` at `f19170a7d7d3c1b6f0931bc7b8f6c9b31688b902` | content addressing and Git retention create no protocol choice |
 | DB-EX-11 | Reconcile authorization, checker retention, and provenance status | authorization now states the PowerShell exception; checker is locally present and executable; required audit status lines occur exactly once | changes no inspected-package bytes or protocol meaning |
 
 ### Current template-input identities
@@ -84,9 +84,9 @@ mechanically checkable oracles—not mere absence of another template.
   cases, profiles, corpora, instrumentation, environments, and analysis rules.
 - A durable old-package receipt needs an exact complete inventory, executable
   checker identity, captured streams/status/timestamps, and durable binding.
-- External durable retention of this boundary package requires a separately
-  authorized mechanism. The in-scope content binding is complete; no Git
-  operation or durable-retention claim is made here.
+
+Branch-local Git binding of this boundary package is complete. It is not a
+remaining safe-now task and does not cure the old package's inventory defect.
 
 ## NO_LONGER_NEEDED
 

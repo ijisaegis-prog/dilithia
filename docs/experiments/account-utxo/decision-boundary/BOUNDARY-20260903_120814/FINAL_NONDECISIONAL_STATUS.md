@@ -8,10 +8,11 @@
 
 The first value means all documentary and technical work permitted in this run
 has been executed, including a complete content-addressed boundary-package
-binding and all eight checker groups. It does not claim Git durability:
-external retention requires authorization beyond this run and is an explicit
-prerequisite. The second value is limited to material comparison progress from
-the current frozen inputs.
+binding and all eight checker groups. Branch-local Git binding is also complete:
+the substantive package was committed and pushed on
+`automation/decision-boundary-20260903_120814` at
+`f19170a7d7d3c1b6f0931bc7b8f6c9b31688b902`. The second value is limited to
+material comparison progress from the current frozen inputs.
 
 ## Process status
 
@@ -42,8 +43,8 @@ edit, or merge is created by this package.
 - Selection-language and evidence-verb scans: current matches explicitly
   disposed in `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`; earlier unexplained
   counts are superseded. Other earlier checks retain only their bounded scope.
-- Boundary-package content binding: **EXECUTED**; external durable retention:
-  **NOT AUTHORIZED / NOT CLAIMED**.
+- Boundary-package content binding: **EXECUTED**; branch-local Git binding:
+  **COMMITTED AND PUSHED** at the commit identified above.
 - Substantive candidate symmetry: **NOT VERIFIED**.
 - Gate 1 direct evidence credit from the structural package: remains limited by
   its own provenance/re-execution declarations.

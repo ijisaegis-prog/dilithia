@@ -59,9 +59,10 @@ also inspected the Rust source for a candidate state-model realization.
    No package-wide pass is claimed.
 8. Corrected the authorization and checker-retention accounts and created the
    complete in-scope content binding recorded in
-   `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. External Git retention was not
-   performed and is stated as an authorization prerequisite, not as
-   unexecuted safe-now work.
+   `PACKAGE_WIDE_SAFE_CHECK_EXECUTION.md`. The substantive boundary package was
+   then committed and pushed on
+   `automation/decision-boundary-20260903_120814` at
+   `f19170a7d7d3c1b6f0931bc7b8f6c9b31688b902`.
 
 The checker identity, invocation, environment, timestamps, stream hashes,
 inventory digest, set mismatch, and explicit lexical dispositions are recorded
@@ -73,10 +74,10 @@ predicate or that the inventory mismatch is the sole possible failure.
 
 - Correcting the old manifest would modify an existing tracked file, expressly
   forbidden for this run.
-- The old package's schema requires a durable external binding mechanism for a
-  current receipt. This run completed the permitted content-addressed binding,
-  but Git retention is outside its authorization and remains an external
-  prerequisite. The package therefore makes no durable-receipt claim.
+- The old package's schema requires a valid current receipt over an exact
+  inventory. Branch-local binding of this boundary package does not repair the
+  old package's manifest set mismatch and does not create an old-package
+  package-wide PASS or durable receipt.
 - Substantive symmetry cannot be checked from mirrored empty slots.
 - Candidate behavior cannot be tested without symmetric implementations,
   harnesses, or executable oracles.
@@ -91,9 +92,9 @@ The current stopping boundary, without claiming a fixed point, is:
 > All work permitted by this run has been executed: the checker is locally
 > present and executable, the boundary package has an explicit content binding,
 > the governed inventory and digest are recorded, the two-sided set mismatch is
-> stated, and every current lexical match is classified. External durable
-> retention is an authorization prerequisite and is not claimed. The source
-> package cannot be repaired in this run, and
+> stated, every current lexical match is classified, and the substantive
+> boundary package is committed and pushed on its automation branch. The old
+> source package was not repaired in this run, and
 > no further material Account-vs-UTXO evidence can be produced from the current
 > frozen inputs without crossing a protected decision, implementation, method,
 > or evidence boundary.

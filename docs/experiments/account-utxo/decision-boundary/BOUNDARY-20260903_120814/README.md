@@ -2,6 +2,7 @@
 
 **Run:** `BOUNDARY-20260903_120814`
 **Source supplied by owner:** branch `analysis/account-utxo-state-model-comparison`, commit `fe094d20d9e6f13903a2033c74a289ab18605d40`
+**Boundary-package Git binding:** branch `automation/decision-boundary-20260903_120814`, commit `f19170a7d7d3c1b6f0931bc7b8f6c9b31688b902` (committed and pushed)
 **Classification:** non-normative audit and documentary execution record
 **Protocol adoption effect:** none
 
@@ -25,9 +26,9 @@ not have the complete, current, content-bound package-wide receipt required by
 its own schema. This run cannot repair the old manifest because the mission
 forbids modifying existing tracked files.
 
-The permitted content-addressed binding of this package is complete. External
-durable retention is not authorized and is not claimed. Further material
-state-model comparison progress requires protected inputs,
+The content-addressed binding is complete, and the substantive boundary
+package was committed and pushed at the branch-local Git binding identified
+above. Further material state-model comparison progress requires protected inputs,
 candidate-symmetric implementations, or missing evidence after applicable
 method prerequisites are frozen.
 

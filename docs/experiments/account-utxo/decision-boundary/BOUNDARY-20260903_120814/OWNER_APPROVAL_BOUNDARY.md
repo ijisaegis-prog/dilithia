@@ -7,7 +7,9 @@ this directory; retain, correct, and execute the exact permitted
 `PACKAGE_WIDE_SAFE_CHECK.ps1`; execute non-mutating structural, inventory,
 language, provenance, and source-presence checks; classify blockers; and expose
 decision questions. No other non-Markdown artifact and no Git operation was
-authorized.
+authorized within the audit action itself. The outer runner subsequently
+completed the branch-local commit and push recorded by this package; that
+binding is complete and is not a pending approval item.
 
 ## What this run completed without approval
 

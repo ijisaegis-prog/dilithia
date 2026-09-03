@@ -10,7 +10,9 @@ explicit reviewed language dispositions and observation-level provenance
 classification. It is locally present and executable. The inspected package
 still fails group 2, so no package-wide pass or durable old-package receipt is
 claimed. This boundary run records a receipt-excluded content binding below;
-external durable retention is outside its authorization and is not claimed.
+the substantive boundary package was subsequently committed and pushed on
+`automation/decision-boundary-20260903_120814` at
+`f19170a7d7d3c1b6f0931bc7b8f6c9b31688b902`.
 
 ## Corrected execution identity
 
@@ -30,7 +32,8 @@ external durable retention is outside its authorization and is not claimed.
 | stderr SHA-256 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 
 The stdout hash identifies the recorded PowerShell `Out-String` capture,
-including its final platform newline. It does not provide Git durability.
+including its final platform newline. The separate branch-local Git binding is
+identified above.
 
 ## Correction-verification rerun
 
@@ -50,7 +53,9 @@ The rerun reproduced the 25 Markdown files, 24 governed inputs, 24 manifest
 declarations, legacy literal-backtick-`t` inventory digest
 `c2f6ac436a63d8c1e6ddb15f9f2130126a42cb67ce4999bff2fea2d16823391e`,
 the wrongly declared excluded receipt, and the omitted final dual review. This
-is a locally captured observation, not a durable Git-bound receipt.
+locally captured observation is bounded by the failed old-package inventory
+predicate. Its inclusion in the boundary package's branch-local Git binding
+does not turn it into the old package's required receipt.
 
 ## Input inventory and actual defect
 
@@ -183,6 +188,6 @@ Aggregate SHA-256: `b5bf8c1065fad00ead1e01650362f9d0854ea89661380e3d84313fa4b849
 | `README.md` | `eca7208c2b88679bbb85f2facb0b57b032d416fdc29ee9f7014b830bb1df76d3` |
 
 This content binding detects changes to every non-receipt boundary artifact.
-It is not an external durability mechanism. Git retention or another durable
-anchor requires separate authorization and remains a prerequisite, not an
-executed or implied operation.
+The substantive boundary package, including this receipt, was retained by the
+branch-local commit identified above. That retention does not repair or bind a
+passing receipt for the inspected old package.
