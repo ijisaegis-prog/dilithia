@@ -1,3 +1,4 @@
 fn main() {
-    println!("Hello, world!");
+    eprintln!("dilithia-node is not implemented; no node functionality is available");
+    std::process::exit(1);
 }

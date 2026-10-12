@@ -1,6 +1,6 @@
 //! Canonical fixed-width unsigned integer encoding and decoding.
 
-use crate::SerializationError;
+use crate::{DecoderInput, SerializationError};
 
 /// Encodes a `u8` as exactly one byte.
 pub fn encode_u8(value: u8) -> [u8; 1] {
@@ -28,36 +28,39 @@ pub fn encode_u128(value: u128) -> [u8; 16] {
 }
 
 /// Decodes a `u8` from exactly one byte at the start of `input`.
-pub fn decode_u8(input: &mut &[u8]) -> Result<u8, SerializationError> {
+pub fn decode_u8(input: &mut dyn DecoderInput) -> Result<u8, SerializationError> {
     Ok(u8::from_le_bytes(take_bytes(input)?))
 }
 
 /// Decodes a `u16` from two little-endian bytes at the start of `input`.
-pub fn decode_u16(input: &mut &[u8]) -> Result<u16, SerializationError> {
+pub fn decode_u16(input: &mut dyn DecoderInput) -> Result<u16, SerializationError> {
     Ok(u16::from_le_bytes(take_bytes(input)?))
 }
 
 /// Decodes a `u32` from four little-endian bytes at the start of `input`.
-pub fn decode_u32(input: &mut &[u8]) -> Result<u32, SerializationError> {
+pub fn decode_u32(input: &mut dyn DecoderInput) -> Result<u32, SerializationError> {
     Ok(u32::from_le_bytes(take_bytes(input)?))
 }
 
 /// Decodes a `u64` from eight little-endian bytes at the start of `input`.
-pub fn decode_u64(input: &mut &[u8]) -> Result<u64, SerializationError> {
+pub fn decode_u64(input: &mut dyn DecoderInput) -> Result<u64, SerializationError> {
     Ok(u64::from_le_bytes(take_bytes(input)?))
 }
 
 /// Decodes a `u128` from sixteen little-endian bytes at the start of `input`.
-pub fn decode_u128(input: &mut &[u8]) -> Result<u128, SerializationError> {
+pub fn decode_u128(input: &mut dyn DecoderInput) -> Result<u128, SerializationError> {
     Ok(u128::from_le_bytes(take_bytes(input)?))
 }
 
-pub(crate) fn take_bytes<const N: usize>(input: &mut &[u8]) -> Result<[u8; N], SerializationError> {
-    let (bytes, remaining) = input
+pub(crate) fn take_bytes<const N: usize>(
+    input: &mut dyn DecoderInput,
+) -> Result<[u8; N], SerializationError> {
+    let (bytes, _) = input
+        .remaining()
         .split_first_chunk::<N>()
         .ok_or(SerializationError::UnexpectedEof)?;
     let bytes = *bytes;
-    *input = remaining;
+    input.advance(N)?;
     Ok(bytes)
 }
 
@@ -229,7 +232,7 @@ mod tests {
     fn assert_decodes_and_advances<T: Debug + PartialEq>(
         encoded: &[u8],
         expected: T,
-        decode: fn(&mut &[u8]) -> Result<T, SerializationError>,
+        decode: fn(&mut dyn DecoderInput) -> Result<T, SerializationError>,
     ) {
         let mut bytes = Vec::from(encoded);
         bytes.push(0xaa);
@@ -241,7 +244,7 @@ mod tests {
 
     fn assert_all_truncated_inputs_unchanged<T: Debug + PartialEq>(
         width: usize,
-        decode: fn(&mut &[u8]) -> Result<T, SerializationError>,
+        decode: fn(&mut dyn DecoderInput) -> Result<T, SerializationError>,
     ) {
         const BYTES: [u8; 16] = [0xa5; 16];
 

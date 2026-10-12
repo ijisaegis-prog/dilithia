@@ -1,6 +1,6 @@
 //! Canonical fixed-size byte-array encoding and decoding.
 
-use crate::{SerializationError, fixed_width::take_bytes};
+use crate::{DecoderInput, SerializationError, fixed_width::take_bytes};
 
 /// Encodes a fixed-size byte array without a length prefix or padding.
 pub fn encode_bytes<const N: usize>(value: &[u8; N]) -> [u8; N] {
@@ -8,7 +8,9 @@ pub fn encode_bytes<const N: usize>(value: &[u8; N]) -> [u8; N] {
 }
 
 /// Decodes exactly `N` bytes from the start of `input`.
-pub fn decode_bytes<const N: usize>(input: &mut &[u8]) -> Result<[u8; N], SerializationError> {
+pub fn decode_bytes<const N: usize>(
+    input: &mut dyn DecoderInput,
+) -> Result<[u8; N], SerializationError> {
     take_bytes(input)
 }
 

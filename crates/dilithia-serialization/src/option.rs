@@ -1,6 +1,6 @@
 //! Canonical `Option<T>` encoding and decoding.
 
-use crate::SerializationError;
+use crate::{DecoderInput, SerializationError, cursor::transactional, decode_u8};
 
 /// Encodes an `Option<T>` using the canonical tag followed by encoded `T`.
 pub fn encode_option<T, F, B, E>(value: Option<T>, encode_value: F) -> Result<Vec<u8>, E>
@@ -21,28 +21,20 @@ where
 /// Decodes an `Option<T>` using the supplied canonical decoder for `T`.
 ///
 /// The caller's input is advanced only after the complete option decodes
-/// successfully. It remains unchanged for every error.
+/// successfully. It remains unchanged for every error. The nested decoder
+/// receives a sealed forward-only cursor whose source cannot be replaced.
 pub fn decode_option<T, F>(
-    input: &mut &[u8],
+    input: &mut dyn DecoderInput,
     decode_value: F,
 ) -> Result<Option<T>, SerializationError>
 where
-    F: FnOnce(&mut &[u8]) -> Result<T, SerializationError>,
+    F: FnOnce(&mut dyn DecoderInput) -> Result<T, SerializationError>,
 {
-    let mut cursor = *input;
-    let (&tag, remaining) = cursor
-        .split_first()
-        .ok_or(SerializationError::UnexpectedEof)?;
-    cursor = remaining;
-
-    let value = match tag {
-        0x00 => None,
-        0x01 => Some(decode_value(&mut cursor)?),
-        _ => return Err(SerializationError::InvalidOptionTag),
-    };
-
-    *input = cursor;
-    Ok(value)
+    transactional(input, |cursor| match decode_u8(cursor)? {
+        0x00 => Ok(None),
+        0x01 => decode_value(cursor).map(Some),
+        _ => Err(SerializationError::InvalidOptionTag),
+    })
 }
 
 #[cfg(test)]
@@ -51,8 +43,8 @@ mod tests {
 
     use super::{decode_option, encode_option};
     use crate::{
-        SerializationError, decode_bool, decode_bytes, decode_u8, decode_u64, encode_bool,
-        encode_bytes, encode_u8, encode_u64,
+        DecoderInput, SerializationError, decode_bool, decode_bytes, decode_u8, decode_u64,
+        encode_bool, encode_bytes, encode_u8, encode_u64,
     };
 
     #[derive(Debug, PartialEq, Eq)]
@@ -245,7 +237,7 @@ mod tests {
         let original = input;
         assert_eq!(
             decode_option(&mut input, |input| {
-                *input = &input[1..];
+                input.advance(1)?;
                 Err::<u8, _>(SerializationError::UnexpectedEof)
             }),
             Err(SerializationError::UnexpectedEof)
@@ -275,12 +267,39 @@ mod tests {
     fn assert_nested_error_unchanged<T: core::fmt::Debug + PartialEq>(
         bytes: &[u8],
         expected: SerializationError,
-        decode_value: impl FnOnce(&mut &[u8]) -> Result<T, SerializationError>,
+        decode_value: impl FnOnce(&mut dyn DecoderInput) -> Result<T, SerializationError>,
     ) {
         let mut input = bytes;
         let original = input;
 
         assert_eq!(decode_option(&mut input, decode_value), Err(expected));
+        assert_eq!(input, original);
+    }
+
+    #[test]
+    fn decodes_nested_zero_width_values_and_leaves_trailing_bytes() {
+        let bytes = [0x01, 0x01, 0xaa];
+        let mut input = bytes.as_slice();
+
+        assert_eq!(
+            decode_option(&mut input, |input| {
+                decode_option(input, decode_bytes::<0>)
+            }),
+            Ok(Some(Some([])))
+        );
+        assert_eq!(input, &[0xaa]);
+    }
+
+    #[test]
+    fn deeply_nested_truncation_rolls_back_every_option_tag() {
+        let bytes = [0x01, 0x01];
+        let mut input = bytes.as_slice();
+        let original = input;
+
+        assert_eq!(
+            decode_option(&mut input, |input| { decode_option(input, decode_u8) }),
+            Err(SerializationError::UnexpectedEof)
+        );
         assert_eq!(input, original);
     }
 }

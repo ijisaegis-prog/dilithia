@@ -1,6 +1,6 @@
 //! Canonical Bool encoding and decoding.
 
-use crate::SerializationError;
+use crate::{DecoderInput, SerializationError};
 
 /// Encodes a Bool using its canonical one-byte representation.
 pub fn encode_bool(value: bool) -> [u8; 1] {
@@ -8,9 +8,11 @@ pub fn encode_bool(value: bool) -> [u8; 1] {
 }
 
 /// Decodes a canonically encoded Bool from the start of `input`.
-pub fn decode_bool(input: &mut &[u8]) -> Result<bool, SerializationError> {
-    let original = *input;
-    let byte = *original.first().ok_or(SerializationError::UnexpectedEof)?;
+pub fn decode_bool(input: &mut dyn DecoderInput) -> Result<bool, SerializationError> {
+    let byte = *input
+        .remaining()
+        .first()
+        .ok_or(SerializationError::UnexpectedEof)?;
 
     let value = match byte {
         0x00 => false,
@@ -18,7 +20,7 @@ pub fn decode_bool(input: &mut &[u8]) -> Result<bool, SerializationError> {
         _ => return Err(SerializationError::InvalidBool),
     };
 
-    *input = &original[1..];
+    input.advance(1)?;
     Ok(value)
 }
 

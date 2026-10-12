@@ -1,6 +1,6 @@
 //! Canonical fixed-width `U256` encoding and decoding.
 
-use crate::{SerializationError, fixed_width::take_bytes};
+use crate::{DecoderInput, SerializationError, fixed_width::take_bytes};
 
 /// An unsigned 256-bit value with private canonical little-endian storage.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -26,7 +26,7 @@ pub fn encode_u256(value: &U256) -> [u8; 32] {
 }
 
 /// Decodes a `U256` from 32 bytes at the start of `input`.
-pub fn decode_u256(input: &mut &[u8]) -> Result<U256, SerializationError> {
+pub fn decode_u256(input: &mut dyn DecoderInput) -> Result<U256, SerializationError> {
     Ok(U256::from_le_bytes(take_bytes(input)?))
 }
 

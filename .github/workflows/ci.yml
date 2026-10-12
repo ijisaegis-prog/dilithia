@@ -12,6 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
@@ -22,7 +26,60 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: Clippy
-        run: cargo clippy --workspace --all-targets -- -D warnings
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
 
       - name: Test
-        run: cargo test --workspace
+        run: cargo test --workspace --locked
+
+      - name: Test consensus-critical primitives (release)
+        run: cargo test --locked --release -p dilithia-crypto -p dilithia-serialization -p dilithia-core
+
+      - name: Finance module syntax
+        run: find apps/dilithia-finance -name '*.mjs' -print0 | xargs -0 -n1 node --check
+
+      - name: Finance unit and render-boundary tests
+        run: node --test apps/dilithia-finance/tests/*.test.mjs
+
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: dtolnay/rust-toolchain@1.97.0
+
+      - name: Check
+        run: cargo check --locked --workspace --all-targets
+
+      - name: Test
+        run: cargo test --locked --workspace
+
+  i686-portability:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: i686-pc-windows-msvc
+          components: clippy
+
+      - name: Check workspace (i686)
+        run: cargo check --locked --workspace --all-targets --target i686-pc-windows-msvc
+
+      - name: Test core determinism boundary (i686)
+        run: cargo test --locked -p dilithia-core --target i686-pc-windows-msvc
+
+      - name: Clippy core determinism boundary (i686)
+        run: cargo clippy --locked -p dilithia-core --all-targets --target i686-pc-windows-msvc -- -D warnings
+
+      - name: Test crypto (i686)
+        run: cargo test --locked -p dilithia-crypto --target i686-pc-windows-msvc
+
+      - name: Clippy crypto (i686)
+        run: cargo clippy --locked -p dilithia-crypto --all-targets --target i686-pc-windows-msvc -- -D warnings
+
+      - name: Test serialization (i686)
+        run: cargo test --locked -p dilithia-serialization --target i686-pc-windows-msvc
+
+      - name: Clippy serialization (i686)
+        run: cargo clippy --locked -p dilithia-serialization --all-targets --target i686-pc-windows-msvc -- -D warnings

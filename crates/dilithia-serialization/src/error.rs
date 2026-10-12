@@ -5,6 +5,7 @@ use core::fmt;
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum SerializationError {
     UnexpectedEof,
+    TrailingBytes,
     InvalidBool,
     InvalidOptionTag,
     NonCanonicalUleb128,
@@ -15,6 +16,7 @@ impl fmt::Display for SerializationError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Self::UnexpectedEof => write!(f, "unexpected end of input"),
+            Self::TrailingBytes => write!(f, "trailing bytes after complete value"),
             Self::InvalidBool => write!(f, "invalid Bool encoding"),
             Self::InvalidOptionTag => write!(f, "invalid Option tag"),
             Self::NonCanonicalUleb128 => write!(f, "non-canonical ULEB128 encoding"),
