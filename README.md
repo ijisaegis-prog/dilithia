@@ -6,6 +6,8 @@ Dilithia is an independent Layer-1 blockchain protocol with a native coin, **$DL
 
 This repository is not yet a working blockchain. There is no Testnet, no Mainnet, and no DLTH has been issued. See [Project Status](#project-status) below for exactly what exists today.
 
+Ticker symbols can be shared by unrelated projects. Use this repository's [project state](./docs/PROJECT_STATE.md) to check the status of native DLTH.
+
 ## Core Principles
 
 Full detail lives in [`CONSTITUTION.md`](./docs/CONSTITUTION.md); in short:
@@ -33,8 +35,15 @@ docs/
 ├─ CONSTITUTION.md          # Supreme constitutional rules
 ├─ SPECIFICATION.md         # Formal protocol behavior
 ├─ THREAT_MODEL.md          # Security threats, assumptions, and trust boundaries
-└─ hips/                    # HIP / Super HIP material
+└─ PROJECT_STATE.md         # Implementation progress and stable baselines
 ```
+
+## Research references
+
+- [Native DLTH lifecycle and conservation](./docs/NATIVE_DLTH_LIFECYCLE_CONSERVATION_REQUIREMENTS.md)
+- [Account and UTXO comparison framework](./docs/ACCOUNT_UTXO_COMPARISON_FRAMEWORK.md)
+- [Value-effect pilot case](./docs/experiments/account-utxo/pilot/VALUE_EFFECT_BASELINE_CASE.md)
+- [Lessons from existing protocols](./docs/EXTERNAL_PROTOCOL_REFERENCES.md)
 
 ## Governance: HIP / Super HIP
 
